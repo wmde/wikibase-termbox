@@ -1,10 +1,6 @@
 <template>
   <div id="app">
     {{message}}
-<<<<<<< HEAD
-=======
-	{{accessEntityData()}}
->>>>>>> Add mw-object-mockup in dev mode
     <TermBox/>
   </div>
 </template>
@@ -26,31 +22,10 @@ import TermBox from './TermBox.vue';
   },
 } )
 export default class App extends Vue {
-<<<<<<< HEAD
-	public message: string = '';
-
-	constructor() {
-		super();
-		this.message = this.getMessage();
-	}
-
-	public getMessage() {
-		let Return = '';
-		// tslint:disable-next-line
-		'#if DEV === true';
-		Return = 'Hallo Welt!';
-		// tslint:disable-next-line
-		'#else';
-		Return = 'Hello world!';
-		// tslint:disable-next-line
-		'#endif';
-		return Return;
-=======
-	public message = 'Hello World!';
+	public message = 'Hello world!';
 
 	public accessEntityData() {
 		console.log( mw.config );
->>>>>>> Add mw-object-mockup in dev mode
 	}
 }
 </script>
