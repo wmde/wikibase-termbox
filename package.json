@@ -3,19 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "serve": "vue-cli-service serve",
-    "dev-server": "concurrently \"tsc -w --p src/server\" \"nodemon serverBuild/server.js\"",
-    "build": "NODE_ENV=production vue-cli-service build",
-    "build-server": "WEBPACK_TARGET=node vue-cli-service build && tsc --p src/server",
-=======
-=======
->>>>>>> Apply rebase
-	"touch": "find ./src -type f -exec touch {} +",
-	"prepDev": "npm run touch; cp babel.dev.config.js babel.config.js",
-	"prepProd": "npm run touch; cp babel.prod.config.js babel.config.js",
+    "touch": "find ./src -type f -exec touch {} +",
+    "prepDev": "npm run touch; cp babel.dev.config.js babel.config.js",
+    "prepProd": "npm run touch; cp babel.prod.config.js babel.config.js",
     "serve": "npm run prepDev; vue-cli-service serve",
+    "dev-server": "concurrently \"tsc -w --p src/server\" \"nodemon serverBuild/server.js\"",
     "build": "npm run prepProd; NODE_ENV=production vue-cli-service build",
     "build-server": "npm run prepProd; WEBPACK_TARGET=node vue-cli-service build && tsc --p src/server",
     "lint": "vue-cli-service lint --no-fix",
