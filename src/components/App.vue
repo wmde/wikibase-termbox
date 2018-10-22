@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    {{message}}
+	  <ul>
+		<li>{{message}}</li>
+		<li>{{accessEntityData()}}</li>
+	</ul>
     <TermBox/>
   </div>
 </template>
@@ -25,7 +28,7 @@ export default class App extends Vue {
 	public message = 'Hello world!';
 
 	public accessEntityData() {
-		console.log( mw.config );
+		return mw.config.get( 'wbEntity' ).id;
 	}
 }
 </script>
