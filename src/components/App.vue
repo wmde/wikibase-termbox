@@ -23,7 +23,7 @@ import TermBox from './TermBox.vue';
   },
 } )
 export default class App extends Vue {
-	public message = 'Hello World!';
+	public message = 'Hello world!';
 
 	public accessEntityData() {
 		console.log( mw.config );
