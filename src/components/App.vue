@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    {{message}}
+    {{getMessage()}}
     <TermBox/>
   </div>
 </template>
@@ -16,7 +16,18 @@ import TermBox from './TermBox.vue';
   },
 } )
 export default class App extends Vue {
-  public message = 'Hello world!';
+	public getMessage() {
+		let Return = '';
+		// tslint:disable-next-line
+		'#if DEV === true';
+		Return = 'Hallo Welt!';
+		// tslint:disable-next-line
+		'#else';
+		Return = 'Hello world!';
+		// tslint:disable-next-line
+		'#endif';
+		return Return;
+	}
 }
 </script>
 
