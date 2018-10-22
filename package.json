@@ -3,14 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "NODE_ENV=production vue-cli-service build",
-    "build-server": "WEBPACK_TARGET=node vue-cli-service build --mode server && tsc --p src/server",
+	"touch": "find ./src -type f -exec touch {} +",
+	"prepDev": "npm run touch; cp babel.dev.config.js babel.config.js",
+	"prepProd": "npm run touch; cp babel.prod.config.js babel.config.js",
+    "serve": "npm run prepDev; vue-cli-service serve",
+    "build": "npm run prepProd; NODE_ENV=production vue-cli-service build",
+    "build-server": "npm run prepProd; WEBPACK_TARGET=node vue-cli-service build --mode server && tsc --p src/server",
     "lint": "vue-cli-service lint --no-fix",
     "fix": "vue-cli-service lint",
     "test": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "babel-plugin-conditional-compilation": "0.0.1",
     "dotenv": "^6.1.0",
     "express": "^4.16.4",
     "vue": "^2.5.17",
