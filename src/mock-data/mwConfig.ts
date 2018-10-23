@@ -1,4 +1,4 @@
-import * as entity from '@/mockup/data/Q64_data.json';
+import * as entity from './data/Q64_data.json';
 
 export default class MWConfig {
 	public get( key: string ): string {
