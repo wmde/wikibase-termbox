@@ -7,4 +7,3 @@ describe( 'mwObject.ts', () => {
 			expect( obj.config ).toBeInstanceOf( MWConfig );
 		} );
 } );
-
