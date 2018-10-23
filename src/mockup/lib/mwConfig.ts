@@ -1,15 +1,11 @@
-import * as Entity from '@/mockup/data/Q64_data.json';
-
-const Data = Entity as any;
+import * as entity from '@/mockup/data/Q64_data.json';
 
 export default class MWConfig {
-	public EntityData: any = '';
+	public get( key: string ): string {
+		const config: { [ index: string]: string } = {
+			wbEntity: JSON.stringify( entity.default ),
+		};
 
-	constructor() {
-		this.EntityData = Data;
-	}
-
-	public get( ignoreMe: string ) {
-		return JSON.stringify( this.EntityData.default );
+		return config[ key ];
 	}
 }

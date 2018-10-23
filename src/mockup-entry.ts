@@ -1,4 +1,7 @@
-import EntityMockup from '@/mockup/lib/mwObject';
+import MWConfig from '@/mockup/lib/mwConfig';
 
 declare let mw: any;
-mw = new EntityMockup();
+
+mw = {
+	config: new MWConfig(),
+};
