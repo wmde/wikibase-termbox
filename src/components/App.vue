@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    {{message}}
+	  {{message}}  
     <TermBox/>
   </div>
 </template>
@@ -16,7 +16,7 @@ import TermBox from './TermBox.vue';
   },
 } )
 export default class App extends Vue {
-  public message = 'Hello world!';
+	public message = 'Hello world!';
 }
 </script>
 
