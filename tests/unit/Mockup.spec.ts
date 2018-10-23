@@ -8,11 +8,11 @@ describe( 'mwConfig.ts', () => {
 
 		it( 'contains Q64', () => {
 			const obj = new MWConfig();
-			expect( obj.get( '' ).id ).toMatch( 'Q64' );
+			expect( obj.get( 'wbEntity' ).default.id ).toMatch( 'Q64' );
 		} );
 
 		it( 'is item', () => {
 			const obj = new MWConfig();
-			expect( obj.get( '' ).type ).toMatch( 'item' );
+			expect( obj.get( 'wbEntity' ).default.type ).toMatch( 'item' );
 		} );
 } );
