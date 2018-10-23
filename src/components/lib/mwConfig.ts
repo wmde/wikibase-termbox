@@ -10,6 +10,6 @@ export default class MWConfig {
 	}
 
 	public get( ignoreMe: string ) {
-		return this.EntityData;
+		return JSON.stringify( this.EntityData.default );
 	}
 }
