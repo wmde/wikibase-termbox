@@ -16,4 +16,3 @@ describe( 'mwConfig.ts', () => {
 			expect( obj.get( '' ).type ).toMatch( 'item' );
 		} );
 } );
-
