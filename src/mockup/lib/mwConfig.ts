@@ -1,4 +1,4 @@
-import * as Entity from './Q64_data.json';
+import * as Entity from '@/mockup/data/Q64_data.json';
 
 const Data = Entity as any;
 
