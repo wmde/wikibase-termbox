@@ -1,28 +1,22 @@
-/**
- * TODO
- * Exceptions on id and type
- */
+import InvalidTermException from './exceptions/invalidTermException';
 
 export default class {
 	private entityObject: any;
 
 	constructor( entityJSONString: string ) {
+		if ( 0 === entityJSONString.length ) {
+			throw new InvalidTermException( 'There was no object given' );
+		}
+
 		this.entityObject = JSON.parse( entityJSONString );
+
+		this.checkPrerequisites();
 	}
 
 	public getId(): string {
-		if ( !this.isEmptyProperty( 'id' ) ) {
-			return '';
-		} else {
-			return this.entityObject.id;
-		}
+		return this.entityObject.id;
 	}
 
-	public isItem(): boolean {
-		return this.entityObject.type === 'item';
-	}
-
-	/* Every Term should have a type */
 	public getType(): string {
 		return this.entityObject.type;
 	}
@@ -35,15 +29,19 @@ export default class {
 		 }
 	}
 
-	public getLabelByLanguageKey( Key: string ): any {
+	public getLabelByLanguageKey( Key: string ): string {
 		if ( !this.isEmptyProperty( 'labels' ) ) {
-			return [];
+			return '';
 		}
 
 		if ( Key in this.entityObject.labels ) {
-			return this.entityObject.labels[ Key ].value;
+			if ( this.entityObject.labels[ Key ].hasOwnProperty( 'value' ) ) {
+				return this.entityObject.labels[ Key ].value;
+			} else {
+				return '';
+				}
 		} else {
-			return [];
+			return '';
 		}
 	}
 
@@ -67,6 +65,24 @@ export default class {
 		}
 	}
 
+	private checkPrerequisites() {
+		if ( !this.entityObject.hasOwnProperty( 'id' ) ) {
+			throw new InvalidTermException( 'Missing termid' );
+		}
+
+		if ( 0 === this.entityObject.id.length ) {
+			throw new InvalidTermException( 'Missing termid' );
+		}
+
+		if ( !this.entityObject.hasOwnProperty( 'type' ) ) {
+			throw new InvalidTermException( `Missing type on term ${this.entityObject.id}` );
+		}
+
+		if ( 0 === this.entityObject.type.length ) {
+			throw new InvalidTermException( `Missing type on term ${this.entityObject.id}` );
+		}
+	}
+
 	private isEmptyProperty( Key: string ) {
 		return this.entityObject.hasOwnProperty( Key );
 	}
@@ -82,7 +98,7 @@ export default class {
 			if ( Item.hasOwnProperty( 'value' ) ) {
 				Return.push( Item.value );
 			}
-		} )
+		} );
 
 		return Return;
 	}
