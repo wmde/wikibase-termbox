@@ -99,7 +99,6 @@ export default class {
 				Return.push( Item.value );
 			}
 		} );
-
 		return Return;
 	}
 }
