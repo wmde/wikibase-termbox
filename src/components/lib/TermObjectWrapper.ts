@@ -1,4 +1,4 @@
-import InvalidTermException from './exceptions/invalidTermException';
+import InvalidTermException from './exceptions/InvalidTermException';
 
 export default class {
 	private entityObject: any;

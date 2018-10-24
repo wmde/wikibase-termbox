@@ -6,7 +6,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import TermObjectWrapper from './lib/termObjectWrapper';
+import TermObjectWrapper from './lib/TermObjectWrapper';
 
 declare const mw: any;
 
