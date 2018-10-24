@@ -13,13 +13,13 @@ describe( 'LanguageSpecificTerm.ts', () => {
 	} );
 
 	it( 'has a label and returns a 2-tuple of languageKey and labelValue', () => {
-		expect( Wrapper.getLabel() ).toMatchObject( [ LanguageKey, MockData.default.labels.de.value ] )
+		expect( Wrapper.getLabel() ).toMatchObject( [ LanguageKey, MockData.default.labels.de.value ] );
 	} );
 
 	it( 'has aliases and returns a 2-tuple of languageKey and aliasesValue', () => {
 		 expect( Wrapper.getAlias() ).toMatchObject( [
 			 LanguageKey,
-			 [ 'Stadt Berlin', 'Berlin, Deutschland', 'Bundeshauptstadt Berlin', 'Land Berlin', 'DE-BE' ]
+			 [ 'Stadt Berlin', 'Berlin, Deutschland', 'Bundeshauptstadt Berlin', 'Land Berlin', 'DE-BE' ],
 		 ] );
 	} );
 } );

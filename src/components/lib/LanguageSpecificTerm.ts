@@ -19,14 +19,14 @@ export default class LanguageSpecificTerm extends TermObjectWrapper {
 	public getLabel() {
 		return [
 			this.defaultLanguageKey,
-			this.getLabelByLanguageKey( this.defaultLanguageKey )
+			this.getLabelByLanguageKey( this.defaultLanguageKey ),
 		];
 	}
 
 	public getAlias() {
 		return [
 			this.defaultLanguageKey,
-			this.getAliasesByLanguageKey( this.defaultLanguageKey )
+			this.getAliasesByLanguageKey( this.defaultLanguageKey ),
 		];
 	}
 }

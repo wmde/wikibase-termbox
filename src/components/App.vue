@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-	  {{message}}
+	{{message}}
     <TermBox/>
   </div>
 </template>
