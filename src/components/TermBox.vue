@@ -6,17 +6,18 @@
 <script lang="ts">
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import TermObjectWrapper from './lib/TermObjectWrapper';
+import LanguageSpecificTerm from '@/components/lib/LanguageSpecificTerm';
 
 declare const mw: any;
+declare const languageKey: string;
 
 @Component
 export default class TermBox extends Vue {
-	public currentTerm: TermObjectWrapper;
+	public currentTerm: LanguageSpecificTerm;
 
 	constructor() {
 		super();
-		this.currentTerm = new TermObjectWrapper( mw.config.get( 'wbEntity' ) );
+		this.currentTerm = new LanguageSpecificTerm( languageKey, mw.config.get( 'wbEntity' ) );
 	}
 }
 </script>

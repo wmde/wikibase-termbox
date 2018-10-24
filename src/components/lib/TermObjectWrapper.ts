@@ -53,7 +53,7 @@ export default class {
 		}
 	}
 
-	public getAliasByLanguageKey( Key: string ): string[] {
+	public getAliasesByLanguageKey( Key: string ): string[] {
 		if ( !this.isEmptyProperty( 'aliases' ) ) {
 			return [];
 		}

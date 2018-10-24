@@ -59,12 +59,12 @@ describe( 'TermObjectWrapper.ts', () => {
 	} );
 
 	it( 'has aliases for specific languageKeys', () => {
-		expect( Wrapper.getAliasByLanguageKey( 'de' ) ).toStrictEqual(
-			['Stadt Berlin', 'Berlin, Deutschland', 'Bundeshauptstadt Berlin', 'Land Berlin', 'DE-BE'],
+		expect( Wrapper.getAliasesByLanguageKey( 'de' ) ).toStrictEqual(
+			[ 'Stadt Berlin', 'Berlin, Deutschland', 'Bundeshauptstadt Berlin', 'Land Berlin', 'DE-BE' ],
 		);
 	} );
 
 	it( 'returns empty array if aliases  does not contains the languageKey', () => {
-		expect( EmptyWrapper.getAliasByLanguageKey( 'de' ) ).toStrictEqual( [] );
+		expect( EmptyWrapper.getAliasesByLanguageKey( 'de' ) ).toStrictEqual( [] );
 	} );
 } );
