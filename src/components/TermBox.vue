@@ -8,16 +8,16 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import LanguageSpecificTerm from '@/components/lib/LanguageSpecificTerm';
 
-declare const mw: any;
-declare const languageKey: string;
-
 @Component
 export default class TermBox extends Vue {
 	public currentTerm: LanguageSpecificTerm;
 
 	constructor() {
 		super();
-		this.currentTerm = new LanguageSpecificTerm( languageKey, mw.config.get( 'wbEntity' ) );
+		this.currentTerm = new LanguageSpecificTerm(
+			this.$store.state.languageKey,
+			this.$store.state.termData,
+		);
 	}
 }
 </script>
