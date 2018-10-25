@@ -3,14 +3,14 @@ import App from '@/components/App.vue';
 import LanguageSpecificTerm from '@/components/lib/LanguageSpecificTerm';
 import TermObjectWrapperClient from '@/components/lib/TermObjectWrapperClient';
 import Vuex from 'vuex';
-import ComplexTypes from '@/ComplexStoreTypes';
+import StoreStates from '@/StoreStates';
 
 declare const mw: any;
 
 Vue.use( Vuex );
 Vue.config.productionTip = false;
 
-const store = new Vuex.Store<ComplexTypes>( {
+const store = new Vuex.Store<StoreStates>( {
 	state: {
 		term: new LanguageSpecificTerm(
 			mw.uls.getBrowserLanguage(),
