@@ -1,13 +1,29 @@
 import Vue from 'vue';
 import App from '@/components/App.vue';
-import store from '@/store';
-
-Vue.config.productionTip = false;
+import LanguageSpecificTerm from '@/components/lib/LanguageSpecificTerm';
+import TermObjectWrapperClient from '@/components/lib/TermObjectWrapperClient';
+import Vuex from 'vuex';
+import ComplexTypes from '@/ComplexStoreTypes';
 
 declare const mw: any;
 
-store.state.languageKey = mw.uls.getBrowserLanguage();
-store.state.termData = mw.config.get( 'wbEntity' );
+Vue.use( Vuex );
+Vue.config.productionTip = false;
+
+const store = new Vuex.Store<ComplexTypes>( {
+	state: {
+		term: new LanguageSpecificTerm(
+			mw.uls.getBrowserLanguage(),
+			new TermObjectWrapperClient( mw.config.get( 'wbEntity' ) ),
+		),
+	},
+	mutations: {
+	},
+	getters: {
+	},
+	actions: {
+	},
+} );
 
 new Vue( {
   store,
