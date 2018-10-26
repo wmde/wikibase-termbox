@@ -1,10 +1,11 @@
-import TermObjectInterface from '@/components/lib/TermObjectInterface';
+import DictionaryInterface from '@/components/lib/interfaces/DictionaryInterface';
+import TermObjectInterface from '@/components/lib/interfaces/TermObjectInterface';
 import InvalidTermException from '@/components/lib/exceptions/InvalidTermException';
 
 export default class TermObjectWrapperClient implements TermObjectInterface {
-	protected Labels: any;
-	protected Aliases: any;
-	protected Descriptions: any;
+	protected Labels: DictionaryInterface<string>;
+	protected Aliases: DictionaryInterface<string[]>;
+	protected Descriptions: DictionaryInterface<string>;
 	private Id: string;
 	private Type: string;
 	constructor( EntityJSONString: string ) {
@@ -26,27 +27,28 @@ export default class TermObjectWrapperClient implements TermObjectInterface {
 		return this.Type;
 	}
 
-	public getLabels(): any[] {
+	public getLabels(): DictionaryInterface<string> {
 		return this.Labels;
 	}
 
-	public getDescriptions(): any[] {
+	public getDescriptions(): DictionaryInterface<string> {
 		return this.Descriptions;
 	}
 
-	public getAliases(): any[] {
+	public getAliases(): DictionaryInterface<string[]> {
 		return this.Aliases;
 	}
 
-	public getLabelByLanguageKey( Key: any ): string {
+	public getLabelByLanguageKey( Key: string ): string {
 		if ( this.Labels.hasOwnProperty( Key ) ) {
 			return this.Labels[ Key ];
+			return '';
 		} else {
 			return '';
 		}
 	}
 
-	public getDescriptionByLanguageKey( Key: any ): string {
+	public getDescriptionByLanguageKey( Key: string ): string {
 		if ( this.Descriptions.hasOwnProperty( Key ) ) {
 			return this.Descriptions[ Key ];
 		} else {
@@ -54,7 +56,7 @@ export default class TermObjectWrapperClient implements TermObjectInterface {
 		}
 	}
 
-	public getAliasByLanguageKey( Key: any ): string[] {
+	public getAliasByLanguageKey( Key: string ): string[] {
 		if ( this.Aliases.hasOwnProperty( Key ) ) {
 			return this.Aliases[ Key ];
 		} else {
@@ -62,11 +64,11 @@ export default class TermObjectWrapperClient implements TermObjectInterface {
 		}
 	}
 
-	private getNestedValues( TermObject: any, Index: string ): any {
-		const Return: any = {};
+	private getNestedValues( TermObject: any, Index: string ): DictionaryInterface<string> {
+		const Return: DictionaryInterface<string> = {};
 
 		if ( !TermObject.hasOwnProperty( Index ) ) {
-			return [];
+			return Return;
 		}
 		Object.keys( TermObject[ Index ] ).forEach( ( LanguageKey: string ) => {
 			Return[ LanguageKey ] = TermObject[ Index ][ LanguageKey ].value;
@@ -75,15 +77,15 @@ export default class TermObjectWrapperClient implements TermObjectInterface {
 		return Return;
 	}
 
-	private getNestedLabels( TermObject: any ): any {
+	private getNestedLabels( TermObject: any ): DictionaryInterface<string> {
 		return this.getNestedValues( TermObject, 'labels' );
 	}
 
-	private getNesatedDescriptions( TermObject: any ): any {
+	private getNesatedDescriptions( TermObject: any ): DictionaryInterface<string> {
 		return this.getNestedValues( TermObject, 'descriptions' );
 	}
 
-	private checkPrerequisites( TermObject: any ) {
+	private checkPrerequisites( TermObject: any ): void {
 		if ( !TermObject.hasOwnProperty( 'id' ) ) {
 			throw new InvalidTermException( 'Missing termid' );
 		}
@@ -101,11 +103,11 @@ export default class TermObjectWrapperClient implements TermObjectInterface {
 		}
 	}
 
-	private getNestedAliases( TermObject: any ): string[] {
-		const Return: any = {};
+	private getNestedAliases( TermObject: any ): DictionaryInterface<string[]> {
+		const Return: DictionaryInterface<string[]>  = {};
 		let SubEntries: string[];
 		if ( !TermObject.hasOwnProperty( 'aliases' ) || 0 === TermObject.aliases.length ) {
-			return [];
+			return Return;
 		}
 
 		Object.keys( TermObject.aliases ).forEach( ( LanguageKey: string ) => {

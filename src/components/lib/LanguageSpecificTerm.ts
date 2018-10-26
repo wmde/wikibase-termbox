@@ -1,5 +1,5 @@
 import LanguageSpecificTermException from '@/components/lib/exceptions/LanguageSpecificTermException';
-import TermObjectInterface from '@/components/lib/TermObjectInterface';
+import TermObjectInterface from '@/components/lib/interfaces/TermObjectInterface';
 
 export default class LanguageSpecificTerm {
 	private defaultLanguageKey: string = '';
@@ -16,21 +16,21 @@ export default class LanguageSpecificTerm {
 		this.Term = Term;
 	}
 
-	public getLabel() {
+	public getLabel(): [string, string] {
 		return [
 			this.defaultLanguageKey,
 			this.Term.getLabelByLanguageKey( this.defaultLanguageKey ),
 		];
 	}
 
-	public getDescription() {
+	public getDescription(): [string, string] {
 		return [
 			this.defaultLanguageKey,
 			this.Term.getDescriptionByLanguageKey( this.defaultLanguageKey ),
 		];
 	}
 
-	public getAlias() {
+	public getAlias(): [string, string[]] {
 		return [
 			this.defaultLanguageKey,
 			this.Term.getAliasByLanguageKey( this.defaultLanguageKey ),

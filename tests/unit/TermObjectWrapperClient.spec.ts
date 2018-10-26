@@ -42,8 +42,8 @@ describe( 'TermObjectWrapperClient.ts', () => {
 		);
 	} );
 
-	it( 'returns empty array if there are no labels', () => {
-		expect( EmptyWrapper.getLabels() ).toStrictEqual( [] );
+	it( 'returns empty dict if there are no labels', () => {
+		expect( EmptyWrapper.getLabels() ).toStrictEqual( {} );
 	} );
 
 	it( 'has label by languageKey', () => {
@@ -62,13 +62,17 @@ describe( 'TermObjectWrapperClient.ts', () => {
 		);
 	} );
 
+	it( 'returns empty dict if there are no descriptions', () => {
+		expect( EmptyWrapper.getDescriptions() ).toStrictEqual( {} );
+	} );
+
 	it( 'has description by languageKey', () => {
 		expect( Wrapper.getDescriptionByLanguageKey( 'de' ) ).toStrictEqual(
 			'Hauptstadt und Land der Bundesrepublik Deutschland',
 		);
 	} );
 
-	it( 'returns empty array if descriptions does not contains the languageKey', () => {
+	it( 'returns a empty string if descriptions does not contains the languageKey', () => {
 		expect( Wrapper.getDescriptionByLanguageKey( 'thisNotGonnaWork' ) ).toEqual( '' );
 	} );
 
@@ -80,8 +84,8 @@ describe( 'TermObjectWrapperClient.ts', () => {
 		);
 	} );
 
-	it( 'returns empty array if there are no aliases', () => {
-		expect( EmptyWrapper.getAliases() ).toStrictEqual( [] );
+	it( 'returns empty dict if there are no aliases', () => {
+		expect( EmptyWrapper.getAliases() ).toStrictEqual( {} );
 	} );
 
 	it( 'has aliases for specific languageKeys', () => {
