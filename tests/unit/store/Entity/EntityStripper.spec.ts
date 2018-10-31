@@ -5,8 +5,8 @@ import * as MockData from '@/mock-data/data/Q64_data.json';
 const Stripper = new EntityStripper( MockData.default );
 const EmptyStripper = new EntityStripper( '{"id":"Q123", "type":"item" }' );
 
-describe( 'EntityStripper.ts', () => {
-	it( 'throws an error when the term has no id', () => {
+describe( '/store/Entity/EntityStripper.ts', () => {
+	it( 'throws an error when the entity has no id', () => {
 		expect( () => {
 			const dummy = new EntityStripper( '' );
 		} ).toThrowError( SyntaxError );
@@ -18,15 +18,15 @@ describe( 'EntityStripper.ts', () => {
 		expect( () => {
 			const dummy = new EntityStripper( 'justATest' );
 		} ).toThrowError( SyntaxError );
-	} );
-
-	it( 'throws an error when the term has no type', () => {
-		expect( () => {
-			const dummy = new EntityStripper( '{"id": "Q123"}' );
-		} ).toThrowError( InvalidEntityException );
 
 		expect( () => {
 			const dummy = new EntityStripper( '{"type": "item"}' );
+		} ).toThrowError( InvalidEntityException );
+	} );
+
+	it( 'throws an error when the entity has no type', () => {
+		expect( () => {
+			const dummy = new EntityStripper( '{"id": "Q123"}' );
 		} ).toThrowError( InvalidEntityException );
 	} );
 
@@ -34,7 +34,7 @@ describe( 'EntityStripper.ts', () => {
 		expect( Stripper.getId() ).toMatch( 'Q64' );
 	} );
 
-	it( 'has a term type', () => {
+	it( 'has a entity type', () => {
 		expect( Stripper.getType() ).toMatch( 'item' );
 	} );
 

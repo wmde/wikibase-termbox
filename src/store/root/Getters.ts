@@ -27,7 +27,7 @@ export const getters: GetterTree<StateInterface, any> = {
 		const CurrentLanguage: string = Getters[ `${ NS_LANGUAGE }/${ LANGUAGE_GET_PRIMARY_LANGUAGE }` ];
 		return Getters[ `${ NS_ENTITY }/${ ENTITY_GET_DESCRIPTION_BY_LANGUAGE }` ]( CurrentLanguage );
 	},
-	[GET_LABEL] ( State: StateInterface, Getters: any ): string {
+	[GET_ALIASES] ( State: StateInterface, Getters: any ): string {
 		const CurrentLanguage: string = Getters[ `${ NS_LANGUAGE }/${ LANGUAGE_GET_PRIMARY_LANGUAGE }` ];
 		return Getters[ `${ NS_ENTITY }/${ ENTITY_GET_ALIASES_BY_LANGUAGE }` ]( CurrentLanguage );
 	},
