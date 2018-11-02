@@ -54,7 +54,7 @@ export default class LanguageStripper extends BaseStripper {
 	}
 
 	private checkPrerequisites(): void {
-		let checkMark = this.checkTupel();
+		let checkMark: number = this.checkTupel();
 		if ( this.TUPEL_NO === checkMark ) {
 			throw new InvalidLanguageTupelException( 'There is no tupel' );
 		}

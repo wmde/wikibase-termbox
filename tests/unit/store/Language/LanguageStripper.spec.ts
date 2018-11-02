@@ -2,12 +2,12 @@ import Languagestripper from '@/store/Language/LanguageStripper';
 import InvalidLanguageTupelException from '@/store/Language/exceptions/InvalidLanguageTupelException';
 import * as MockData from '@/mock-data/data/en_lang_data.json';
 
-const allLanguages = [
+const allLanguages: string[] = [
 	'en', 'de', 'zh', 'fr', 'bar', 'nds', 'nl', 'it', 'es', 'ru', 'vmf', 'tr', 'gsw',
 	'da', 'hr', 'ku-latn', 'el', 'ksh', 'pl', 'hsb', 'frr', 'dsb', 'stq', 'pfl',
 ];
 
-const stripper = new Languagestripper( [
+const stripper: Languagestripper = new Languagestripper( [
 	allLanguages,
 	9,
 	MockData.default,

@@ -12,7 +12,7 @@ import {
 } from '../data/LanguageStores';
 
 Vue.use( Vuex );
-const namespaced = true;
+const namespaced: boolean = true;
 
 const storeBundle: StoreOptions<StateInterface> = {
 	state,

@@ -6,12 +6,12 @@ import { languageGetters as getters } from '@/store/Language/LanguageGetters';
 import DictionaryInterface from '@/common/interfaces/DictionaryInterface';
 import LanguageStripper from '@/store/Language/LanguageStripper';
 
-export const filledLanguageStripper = new LanguageStripper( [
+export const filledLanguageStripper: LanguageStripper = new LanguageStripper( [
 	[ 'en', 'ru', 'gr', 'it', 'zh' ],
 	3,
 	MockData.default,
 ] );
-const namespaced = true;
+const namespaced: boolean = true;
 
 let languageValue: LanugageProperties = {
 	Primary: '',
@@ -25,7 +25,7 @@ let state: StateInterface = {
 	Language: languageValue,
 };
 
-export const emptyLanguageState = state;
+export const emptyLanguageState: StateInterface = state;
 
 export const emptyLanguageModule: Module<StateInterface, any> = {
 	namespaced,
@@ -45,9 +45,9 @@ state = {
 	Language: languageValue,
 };
 
-export const filledLanguageState = state;
+export const filledLanguageState: StateInterface = state;
 
-export const filledLanguageModule = {
+export const filledLanguageModule: Module<StateInterface, any> = {
 	namespaced,
 	state,
 	getters,

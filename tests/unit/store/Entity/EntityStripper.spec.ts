@@ -2,8 +2,8 @@ import EntityStripper from '@/store/Entity/EntityStripper';
 import InvalidEntityException from '@/store/Entity/exceptions/InvalidEntityException';
 import * as MockData from '@/mock-data/data/Q64_data.json';
 
-const stripper = new EntityStripper( MockData.default );
-const emtpyStripper = new EntityStripper( '{"id":"Q123", "type":"item" }' );
+const stripper: EntityStripper = new EntityStripper( MockData.default );
+const emtpyStripper: EntityStripper = new EntityStripper( '{"id":"Q123", "type":"item" }' );
 
 describe( '/store/Entity/EntityStripper.ts', () => {
 	it( 'throws an error when the entity has no id', () => {

@@ -5,9 +5,9 @@ import { getters } from '@/store/Entity/EntityGetters';
 import * as MockData from '@/mock-data/data/Q64_data.json';
 import StateInterface from '@/store/root/StateInterface';
 
-const namespaced = true;
-export const emptyEntityStripper = new EntityStripper( { id: 'Q123', type: 'item' } );
-export const filledEntityStripper = new EntityStripper( MockData.default );
+const namespaced: boolean = true;
+export const emptyEntityStripper: EntityStripper = new EntityStripper( { id: 'Q123', type: 'item' } );
+export const filledEntityStripper: EntityStripper = new EntityStripper( MockData.default );
 
 let entityValue: EntityProperties = {
 	Id: '',
@@ -22,7 +22,7 @@ let state: StateInterface = {
 	Entity: entityValue,
 };
 
-export const emptyEntityState = state;
+export const emptyEntityState: StateInterface = state;
 export const emptyEntityModule: Module<StateInterface, any> = {
 	namespaced,
 	state,
@@ -42,9 +42,9 @@ state = {
 	Entity: entityValue,
 };
 
-export const filledEntityState = state;
+export const filledEntityState: StateInterface = state;
 
-export const filledEntityModule = {
+export const filledEntityModule: Module<StateInterface, any> = {
 	namespaced,
 	state,
 	getters,

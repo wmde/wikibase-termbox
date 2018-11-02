@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import Vuex, { StoreOptions } from 'vuex';
+import Vuex, { Module, StoreOptions } from 'vuex';
 import EntityProperties from '@/store/Entity/EntityProperties';
 import NonInitilizedEntityException from '@/store/Entity/exceptions/NonInitilizedEntityException';
 import StateInterface from '@/store/root/StateInterface';
@@ -23,7 +23,7 @@ import {
 
 Vue.use( Vuex );
 
-let entity = emptyEntityModule;
+let entity: Module<StateInterface, any>  = emptyEntityModule;
 
 let storeBundle: StoreOptions<StateInterface> = {
 	modules: {
