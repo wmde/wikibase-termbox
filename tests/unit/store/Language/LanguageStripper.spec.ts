@@ -16,12 +16,12 @@ const stripper: Languagestripper = new Languagestripper( [
 describe( '/store/Lanugage/Languagestripper.ts', () => {
 	it( 'throws an error if malicious formed in macroscopic structure', () => {
 		expect( () => {
-			const dummy = new Languagestripper( '' );
-		} ).toThrowError( SyntaxError );
+			const dummy = new Languagestripper( {} );
+		} ).toThrowError( 'There is no tupel' );
 
 		expect( () => {
 			const dummy = new Languagestripper( '[]' );
-		} ).toThrowError( InvalidLanguageTupelException );
+		} ).toThrowError( 'The tupel is not well formed' );
 
 		expect( () => {
 			const dummy = new Languagestripper( 'justATest' );
@@ -29,57 +29,57 @@ describe( '/store/Lanugage/Languagestripper.ts', () => {
 
 		expect( () => {
 			const dummy = new Languagestripper( '[ "type" ]' );
-		} ).toThrowError( InvalidLanguageTupelException );
+		} ).toThrowError( 'The tupel is not well formed' );
 
 		expect( () => {
 			const dummy = new Languagestripper( '[ "type", "asd" ]' );
-		} ).toThrowError( InvalidLanguageTupelException );
+		} ).toThrowError( 'The tupel is not well formed' );
 	} );
 
 	it( 'throws an error if the first entry is not a array of strings', () => {
 		expect( () => {
 			const dummy = new Languagestripper( '[ 123, 2, {} ]' );
-		} ).toThrowError( InvalidLanguageTupelException );
+		} ).toThrowError( 'The tupel contains no languageskeys' );
 
 		expect( () => {
 			const dummy = new Languagestripper( '[ [1,23,4,56,745], 2, {} ]' );
-		} ).toThrowError( InvalidLanguageTupelException );
+		} ).toThrowError( 'The tupel contains no valid languageskeys' );
 
 		expect( () => {
 			const dummy = new Languagestripper( '[ [ "type", "asd", 745], 2, {} ]' );
-			} ).toThrowError( InvalidLanguageTupelException );
+			} ).toThrowError( 'The tupel contains no valid languageskeys' );
 	} );
 
 	it( 'throws an error if the second entry is not a positive number', () => {
 		expect( () => {
 			const dummy = new Languagestripper( [ ['as', 'asd', 'rz'], 'asd', {} ] );
-		} ).toThrowError( InvalidLanguageTupelException );
+		} ).toThrowError( 'The tupel contains no cut length' );
 
 		expect( () => {
 			const dummy = new Languagestripper( [ ['as', 'asd', 'rz'], 0.2, {} ] );
-		} ).toThrowError( InvalidLanguageTupelException );
+		} ).toThrowError( 'The tupel contains no cut length' );
 
 		expect( () => {
 			const dummy = new Languagestripper( [ ['as', 'asd', 'rz'], -1, {} ] );
-		} ).toThrowError( InvalidLanguageTupelException );
+		} ).toThrowError( 'The tupel contains no valid cut length' );
 
 		expect( () => {
-			const dummy = new Languagestripper( [ ['as', 'asd', 'rz'], 2.0, {} ] );
-		} ).toThrowError( InvalidLanguageTupelException );
+			const dummy = new Languagestripper( [ ['as', 'asd', 'rz'], 2.2, {} ] );
+		} ).toThrowError( 'The tupel contains no cut length' );
 
 		expect( () => {
-			const dummy = new Languagestripper( [ ['as', 'asd', 'rz'], 10, {} ] );
-		} ).toThrowError( InvalidLanguageTupelException );
+			const dummy = new Languagestripper( [ ['as', 'asd', 'rz'], 1000, {} ] );
+		} ).toThrowError( 'The tupel contains invalid cut range' );
 	} );
 
 	it( 'throws an error if the 3rd entry is not a dictionary of strings', () => {
 		expect( () => {
 			const dummy = new Languagestripper( [ ['as', 'asd', 'rz'], 1, {} ] );
-		} ).toThrowError( InvalidLanguageTupelException );
+		} ).toThrowError( 'The tupel contains no language labels' );
 
 		expect( () => {
 			const dummy = new Languagestripper( [ ['as', 'asd', 'rz'], 1, [ 1, 2, 3 ] ] );
-		} ).toThrowError( InvalidLanguageTupelException );
+		} ).toThrowError( 'The tupel part of language labels is an array and not a dictionary' );
 	} );
 
 	it( 'contains a primary language key', () => {

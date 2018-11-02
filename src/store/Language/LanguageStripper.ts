@@ -60,7 +60,7 @@ export default class LanguageStripper extends BaseStripper {
 		}
 
 		if ( this.TUPEL_NOT_WELL_FORMED === checkMark ) {
-			throw new InvalidLanguageTupelException( 'The tupel is well formed' );
+			throw new InvalidLanguageTupelException( 'The tupel is not well formed' );
 		}
 
 		checkMark = this.isStringArray();

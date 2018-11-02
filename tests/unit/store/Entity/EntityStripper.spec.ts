@@ -13,7 +13,7 @@ describe( '/store/Entity/EntityStripper.ts', () => {
 
 		expect( () => {
 			const dummy = new EntityStripper( '{}' );
-		} ).toThrowError( InvalidEntityException );
+		} ).toThrowError( 'Missing entityid' );
 
 		expect( () => {
 			const dummy = new EntityStripper( 'justATest' );
@@ -21,13 +21,13 @@ describe( '/store/Entity/EntityStripper.ts', () => {
 
 		expect( () => {
 			const dummy = new EntityStripper( '{"type": "item"}' );
-		} ).toThrowError( InvalidEntityException );
+		} ).toThrowError( 'Missing entityid' );
 	} );
 
 	it( 'throws an error when the entity has no type', () => {
 		expect( () => {
 			const dummy = new EntityStripper( '{"id": "Q123"}' );
-		} ).toThrowError( InvalidEntityException );
+		} ).toThrowError( 'Missing type on entiy Q123' );
 	} );
 
 	it( 'has a id', () => {
