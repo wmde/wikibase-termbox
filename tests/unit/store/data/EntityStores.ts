@@ -6,10 +6,10 @@ import * as MockData from '@/mock-data/data/Q64_data.json';
 import StateInterface from '@/store/root/StateInterface';
 
 const namespaced = true;
-export const EmptyEntityStripper = new EntityStripper( { id: 'Q123', type: 'item' } );
-export const FilledEntityStripper = new EntityStripper( MockData.default );
+export const emptyEntityStripper = new EntityStripper( { id: 'Q123', type: 'item' } );
+export const filledEntityStripper = new EntityStripper( MockData.default );
 
-let EntityValue: EntityProperties = {
+let entityValue: EntityProperties = {
 	Id: '',
 	Type: '',
 	Labels: {},
@@ -19,33 +19,33 @@ let EntityValue: EntityProperties = {
 };
 
 let state: StateInterface = {
-	Entity: EntityValue,
+	Entity: entityValue,
 };
 
-export const EmptyEntityState = state;
-export const EmptyEntityModule: Module<StateInterface, any> = {
+export const emptyEntityState = state;
+export const emptyEntityModule: Module<StateInterface, any> = {
 	namespaced,
-    state,
+	state,
 	getters,
 };
 
-EntityValue = {
-	Id: FilledEntityStripper.getId(),
-	Type: FilledEntityStripper.getType(),
-	Labels: FilledEntityStripper.getLabels(),
-	Descriptions: FilledEntityStripper.getDescriptions(),
-	Aliases: FilledEntityStripper.getAliases(),
+entityValue = {
+	Id: filledEntityStripper.getId(),
+	Type: filledEntityStripper.getType(),
+	Labels: filledEntityStripper.getLabels(),
+	Descriptions: filledEntityStripper.getDescriptions(),
+	Aliases: filledEntityStripper.getAliases(),
 	IsInit: true,
 };
 
 state = {
-	Entity: EntityValue,
+	Entity: entityValue,
 };
 
-export const FilledEntityState = state;
+export const filledEntityState = state;
 
-export const FilledEntityModule = {
-        namespaced,
-        state,
-        getters,
+export const filledEntityModule = {
+	namespaced,
+	state,
+	getters,
 };

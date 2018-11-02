@@ -1,10 +1,10 @@
 import { Module } from 'vuex';
 import LanguageProperties from '@/store/Language/LanguageProperties';
-import { getters } from '@/store/Language/LanguageGetters';
+import { languageGetters as getters } from '@/store/Language/LanguageGetters';
 import { mutations } from '@/store/Language/LanguageMutations';
 import StateInterface from '@/store/root/StateInterface';
 
-const LanguageInit: LanguageProperties = {
+const languageInit: LanguageProperties = {
 	Primary: '',
 	More: [],
 	All: [],
@@ -13,14 +13,14 @@ const LanguageInit: LanguageProperties = {
 };
 
 const state: StateInterface =  {
-	Language: LanguageInit,
+	Language: languageInit,
 };
 
 const namespaced: boolean = true;
 
-export const Language: Module<StateInterface, any> = {
+export const language: Module<StateInterface, any> = {
 	namespaced,
-    state,
+	state,
 	getters,
-    mutations,
+	mutations,
 };

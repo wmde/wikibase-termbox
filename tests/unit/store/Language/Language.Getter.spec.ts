@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuex, { Module, StoreOptions } from 'vuex';
 import StateInterface from '@/store/root/StateInterface';
 import * as MockData from '@/mock-data/data/en_lang_data.json';
-import { getters } from '@/store/Language/LanguageGetters';
+import { languageGetters as getters } from '@/store/Language/LanguageGetters';
 import {
 	LANGUAGE_GET_LABELS,
 	LANGUAGE_GET_PRIMARY_LANGUAGE,
@@ -10,53 +10,53 @@ import {
 import { NS_LANGUAGE } from '@/store/root/Namespaces';
 import NonInitilizedLanguageException from '@/store/Language/exceptions/NonInitilizedLanguageException';
 import {
-	EmptyLanguageModule,
-	FilledLanguageModule,
-	FilledLanguageStripper as Stripper,
+	emptyLanguageModule,
+	filledLanguageModule,
+	filledLanguageStripper as stripper,
 } from '../data/LanguageStores';
 
 Vue.use( Vuex );
 
-let Language: Module<StateInterface, any> = EmptyLanguageModule;
+let language: Module<StateInterface, any> = emptyLanguageModule;
 
-let StoreBundle: StoreOptions<StateInterface> = {
+let storeBundle: StoreOptions<StateInterface> = {
 	modules: {
-		Language,
+		language,
 	},
 };
 
-const EmptyStore = new Vuex.Store<StateInterface>( StoreBundle );
+const emptyStore = new Vuex.Store<StateInterface>( storeBundle );
 
-Language = FilledLanguageModule;
+language = filledLanguageModule;
 
-StoreBundle = {
+storeBundle = {
 	modules: {
-		Language,
+		language,
 	},
 };
 
-const FilledStore = new Vuex.Store<StateInterface>( StoreBundle );
+const filledStore = new Vuex.Store<StateInterface>( storeBundle );
 
 describe( '/store/Language/LanguageGetters.ts', () => {
 	it( 'returns the primary language key', () => {
-		expect( FilledStore.getters[ `${ NS_LANGUAGE }/${ LANGUAGE_GET_PRIMARY_LANGUAGE }` ] )
-			.toMatch( Stripper.getPrimaryLanguage() );
+		expect( filledStore.getters[ `${ NS_LANGUAGE }/${ LANGUAGE_GET_PRIMARY_LANGUAGE }` ] )
+			.toMatch( stripper.getPrimaryLanguage() );
 	} );
 
 	it( 'throws an exception on primary language key, if it is not initilized', () => {
 		expect( () => {
-			const ignore = EmptyStore.getters[ `${ NS_LANGUAGE }/${ LANGUAGE_GET_PRIMARY_LANGUAGE }` ];
+			const ignore = emptyStore.getters[ `${ NS_LANGUAGE }/${ LANGUAGE_GET_PRIMARY_LANGUAGE }` ];
 		} ).toThrow( NonInitilizedLanguageException );
 	} );
 
 	it( 'returns language labels', () => {
-		expect( FilledStore.getters[ `${ NS_LANGUAGE }/${ LANGUAGE_GET_LABELS }` ] )
-			.toStrictEqual( Stripper.getLabels() );
+		expect( filledStore.getters[ `${ NS_LANGUAGE }/${ LANGUAGE_GET_LABELS }` ] )
+			.toStrictEqual( stripper.getLabels() );
 	} );
 
 	it( 'throws an exception on language labels, if it is not initilized', () => {
 		expect( () => {
-			const ignore = EmptyStore.getters[ `${ NS_LANGUAGE }/${ LANGUAGE_GET_LABELS }` ];
+			const ignore = emptyStore.getters[ `${ NS_LANGUAGE }/${ LANGUAGE_GET_LABELS }` ];
 		} ).toThrow( NonInitilizedLanguageException );
 	} );
 } );

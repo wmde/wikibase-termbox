@@ -1,10 +1,10 @@
 export default class BaseStripper {
-	protected UnstrippedObject: any;
+	protected unstrippedObject: any;
 
-	constructor( Something: any ) {
-		if ( 'string' === typeof Something ) {
-			 Something = JSON.parse( Something );
-		 }
-		this.UnstrippedObject = Something;
+	constructor( something: any ) {
+		if ( typeof something === 'string' ) {
+			something = JSON.parse( something );
+		}
+		this.unstrippedObject = something;
 	}
 }

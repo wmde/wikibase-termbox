@@ -2,18 +2,18 @@ import { Module } from 'vuex';
 import LanugageProperties from '@/store/Language/LanguageProperties';
 import StateInterface from '@/store/root/StateInterface';
 import * as MockData from '@/mock-data/data/en_lang_data.json';
-import { getters } from '@/store/Language/LanguageGetters';
+import { languageGetters as getters } from '@/store/Language/LanguageGetters';
 import DictionaryInterface from '@/common/interfaces/DictionaryInterface';
 import LanguageStripper from '@/store/Language/LanguageStripper';
 
-export const FilledLanguageStripper = new LanguageStripper( [
+export const filledLanguageStripper = new LanguageStripper( [
 	[ 'en', 'ru', 'gr', 'it', 'zh' ],
 	3,
 	MockData.default,
 ] );
 const namespaced = true;
 
-let LanguageValue: LanugageProperties = {
+let languageValue: LanugageProperties = {
 	Primary: '',
 	More: [],
 	All: [],
@@ -22,31 +22,32 @@ let LanguageValue: LanugageProperties = {
 };
 
 let state: StateInterface = {
-	Language: LanguageValue,
+	Language: languageValue,
 };
 
-export const EmptyLanguageState = state;
+export const emptyLanguageState = state;
 
-export const EmptyLanguageModule: Module<StateInterface, any> = {
-        namespaced,
-        state,
-        getters,
+export const emptyLanguageModule: Module<StateInterface, any> = {
+	namespaced,
+	state,
+	getters,
 };
-LanguageValue = {
-	Primary: FilledLanguageStripper.getPrimaryLanguage(),
-	More: FilledLanguageStripper.getMoreLanguages(),
-	All: FilledLanguageStripper.getAllLanguages(),
-	Labels: FilledLanguageStripper.getLabels(),
+
+languageValue = {
+	Primary: filledLanguageStripper.getPrimaryLanguage(),
+	More: filledLanguageStripper.getMoreLanguages(),
+	All: filledLanguageStripper.getAllLanguages(),
+	Labels: filledLanguageStripper.getLabels(),
 	IsInit: true,
 };
 
 state = {
-	Language: LanguageValue,
+	Language: languageValue,
 };
 
-export const FilledLanguageState = state;
+export const filledLanguageState = state;
 
-export const FilledLanguageModule = {
+export const filledLanguageModule = {
 	namespaced,
 	state,
 	getters,

@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Vuex, { StoreOptions } from 'vuex';
-import EntityStripper from '@/store/Entity/EntityStripper';
 import StateInterface from '@/store/root/StateInterface';
 import * as MockData from '@/mock-data/data/Q64_data.json';
 import { mutations } from '@/store/Entity/EntityMutations';
@@ -8,14 +7,14 @@ import {
 	ENTITY_INIT,
 } from '@/store/Entity/EntityMethodNames';
 import {
-	EmptyEntityState as state,
-	FilledEntityStripper as Stripper,
+	emptyEntityState as state,
+	filledEntityStripper as stripper,
 } from '../data/EntityStores';
-import InvalidEntityStripperException from '@/store/Entity/exceptions/InvalidEntityStripperException';
+import InvalidEntitystripperException from '@/store/Entity/exceptions/InvalidEntityStripperException';
 
 Vue.use( Vuex );
 
-const StoreOps: StoreOptions<StateInterface> = {
+const storeOps: StoreOptions<StateInterface> = {
 	state,
 	mutations,
 };
@@ -23,55 +22,55 @@ const StoreOps: StoreOptions<StateInterface> = {
 describe( '/store/Entity/EntityMutations.ts', () => {
 	it( 'it throws an error on initilization if an invalid object is given', () => {
 		expect( () => {
-			const Store = new Vuex.Store<StateInterface>( StoreOps );
-			Store.commit( ENTITY_INIT, '' );
-		} ).toThrow( InvalidEntityStripperException );
+			const store = new Vuex.Store<StateInterface>( storeOps );
+			store.commit( ENTITY_INIT, '' );
+		} ).toThrow( InvalidEntitystripperException );
 
 		expect( () => {
-			const Store = new Vuex.Store<StateInterface>( StoreOps );
-			Store.commit( ENTITY_INIT, [] );
-		} ).toThrow( InvalidEntityStripperException );
+			const store = new Vuex.Store<StateInterface>( storeOps );
+			store.commit( ENTITY_INIT, [] );
+		} ).toThrow( InvalidEntitystripperException );
 
 		expect( () => {
-			const Store = new Vuex.Store<StateInterface>( StoreOps );
-			Store.commit( ENTITY_INIT, {} );
-		} ).toThrow( InvalidEntityStripperException );
+			const store = new Vuex.Store<StateInterface>( storeOps );
+			store.commit( ENTITY_INIT, {} );
+		} ).toThrow( InvalidEntitystripperException );
 	} );
 
 	it( 'it sets the initial data', () => {
 		function init() {
-			const Store = new Vuex.Store<StateInterface>( StoreOps );
-			Store.commit( ENTITY_INIT, Stripper );
-			return 'undefined' === typeof Store.state.Entity ?
-				false : Store.state.Entity.IsInit;
+			const store = new Vuex.Store<StateInterface>( storeOps );
+			store.commit( ENTITY_INIT, stripper );
+			return typeof store.state.Entity === 'undefined' ?
+				false : store.state.Entity.IsInit;
 		}
 		expect( init() ).toBeTruthy();
 	} );
 
 	it( 'it contains data after initilization', () => {
 		function init() {
-			const Store = new Vuex.Store<StateInterface>( StoreOps );
-			Store.commit( ENTITY_INIT, Stripper );
-			if ( 'undefined' === typeof Store.state.Entity ) {
+			const store = new Vuex.Store<StateInterface>( storeOps );
+			store.commit( ENTITY_INIT, stripper );
+			if ( typeof store.state.Entity === 'undefined' ) {
 				return [];
 			}
 
 			return [
-				Store.state.Entity.Id,
-				Store.state.Entity.Type,
-				Store.state.Entity.Labels,
-				Store.state.Entity.Descriptions,
-				Store.state.Entity.Aliases,
-				Store.state.Entity.IsInit,
+				store.state.Entity.Id,
+				store.state.Entity.Type,
+				store.state.Entity.Labels,
+				store.state.Entity.Descriptions,
+				store.state.Entity.Aliases,
+				store.state.Entity.IsInit,
 			];
 		}
 
 		expect( init() ).toStrictEqual( [
-			Stripper.getId(),
-			Stripper.getType(),
-			Stripper.getLabels(),
-			Stripper.getDescriptions(),
-			Stripper.getAliases(),
+			stripper.getId(),
+			stripper.getType(),
+			stripper.getLabels(),
+			stripper.getDescriptions(),
+			stripper.getAliases(),
 			true,
 		] );
 	} );

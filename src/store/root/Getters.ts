@@ -18,17 +18,17 @@ import {
 	NS_LANGUAGE,
 } from '@/store/root/Namespaces';
 
-export const getters: GetterTree<StateInterface, any> = {
-	[GET_LABEL] ( State: StateInterface, Getters: any ): string {
-		const CurrentLanguage: string = Getters[ `${ NS_LANGUAGE }/${ LANGUAGE_GET_PRIMARY_LANGUAGE }` ];
-		return Getters[ `${ NS_ENTITY }/${ ENTITY_GET_LABEL_BY_LANGUAGE }` ]( CurrentLanguage );
+export const rootGetters: GetterTree<StateInterface, any> = {
+	[GET_LABEL] ( state: StateInterface, getters: any ): string {
+		const currentLanguage: string = getters[ `${ NS_LANGUAGE }/${ LANGUAGE_GET_PRIMARY_LANGUAGE }` ];
+		return getters[ `${ NS_ENTITY }/${ ENTITY_GET_LABEL_BY_LANGUAGE }` ]( currentLanguage );
 	},
-	[GET_DESCRIPTION] ( State: StateInterface, Getters: any ): string {
-		const CurrentLanguage: string = Getters[ `${ NS_LANGUAGE }/${ LANGUAGE_GET_PRIMARY_LANGUAGE }` ];
-		return Getters[ `${ NS_ENTITY }/${ ENTITY_GET_DESCRIPTION_BY_LANGUAGE }` ]( CurrentLanguage );
+	[GET_DESCRIPTION] ( state: StateInterface, getters: any ): string {
+		const currentLanguage: string = getters[ `${ NS_LANGUAGE }/${ LANGUAGE_GET_PRIMARY_LANGUAGE }` ];
+		return getters[ `${ NS_ENTITY }/${ ENTITY_GET_DESCRIPTION_BY_LANGUAGE }` ]( currentLanguage );
 	},
-	[GET_ALIASES] ( State: StateInterface, Getters: any ): string {
-		const CurrentLanguage: string = Getters[ `${ NS_LANGUAGE }/${ LANGUAGE_GET_PRIMARY_LANGUAGE }` ];
-		return Getters[ `${ NS_ENTITY }/${ ENTITY_GET_ALIASES_BY_LANGUAGE }` ]( CurrentLanguage );
+	[GET_ALIASES] ( state: StateInterface, getters: any ): string {
+		const currentLanguage: string = getters[ `${ NS_LANGUAGE }/${ LANGUAGE_GET_PRIMARY_LANGUAGE }` ];
+		return getters[ `${ NS_ENTITY }/${ ENTITY_GET_ALIASES_BY_LANGUAGE }` ]( currentLanguage );
 	},
 };

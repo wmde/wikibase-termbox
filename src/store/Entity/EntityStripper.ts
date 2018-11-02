@@ -3,22 +3,22 @@ import InvalidEntityException from '@/store/Entity/exceptions/InvalidEntityExcep
 import BaseStripper from '@/common/BaseStripper';
 
 export default class EntityStripper extends BaseStripper {
-	private UnstrippedEntity: any;
+	private unstrippedEntity: any;
 
-	constructor( Entity: any ) {
-		super( Entity );
+	constructor( entity: any ) {
+		super( entity );
 		this.checkPrerequisites();
 		/* see: @/store/Language/LanguageStripper */
-		this.UnstrippedEntity = this.UnstrippedObject;
-		this.UnstrippedObject = '';
+		this.unstrippedEntity = this.unstrippedObject;
+		this.unstrippedObject = '';
 	}
 
 	public getId(): string {
-		return this.UnstrippedEntity.id;
+		return this.unstrippedEntity.id;
 	}
 
 	public getType(): string {
-		return this.UnstrippedEntity.type;
+		return this.unstrippedEntity.type;
 	}
 
 	public getLabels(): DictionaryInterface<string> {
@@ -30,72 +30,72 @@ export default class EntityStripper extends BaseStripper {
 	}
 
 	public getAliases(): DictionaryInterface<string[]> {
-		return this.getNestedAliases( this.UnstrippedEntity );
+		return this.getNestedAliases( this.unstrippedEntity );
 	}
 
-	private getNestedValues( EntityObject: any, Index: string ): DictionaryInterface<string> {
-		const Return: DictionaryInterface<string> = {};
+	private getNestedValues( entityObject: any, index: string ): DictionaryInterface<string> {
+		const value: DictionaryInterface<string> = {};
 
-		if ( !EntityObject.hasOwnProperty( Index ) ) {
-			return Return;
+		if ( !entityObject.hasOwnProperty( index ) ) {
+			return value;
 		}
-		Object.keys( EntityObject[ Index ] ).forEach( ( LanguageKey: string ) => {
-			Return[ LanguageKey ] = EntityObject[ Index ][ LanguageKey ].value;
+		Object.keys( entityObject[ index ] ).forEach( ( languageKey: string ) => {
+			value[ languageKey ] = entityObject[ index ][ languageKey ].value;
 		} );
 
-		return Return;
+		return value;
 	}
 
 	private getNestedLabels(): DictionaryInterface<string> {
-		return this.getNestedValues( this.UnstrippedEntity, 'labels' );
+		return this.getNestedValues( this.unstrippedEntity, 'labels' );
 	}
 
 	private getNesatedDescriptions(): DictionaryInterface<string> {
-		return this.getNestedValues( this.UnstrippedEntity, 'descriptions' );
+		return this.getNestedValues( this.unstrippedEntity, 'descriptions' );
 	}
 
 	private checkPrerequisites(): void {
-		if ( !this.UnstrippedObject.hasOwnProperty( 'id' ) ) {
+		if ( !this.unstrippedObject.hasOwnProperty( 'id' ) ) {
 			throw new InvalidEntityException( 'Missing entityid' );
 		}
 
-		if ( 'string' !== typeof this.UnstrippedObject.id ) {
+		if ( typeof this.unstrippedObject.id !== 'string' ) {
 			throw new InvalidEntityException( 'Unsupported type of entityid' );
 		}
 
-		if ( 0 === this.UnstrippedObject.id.length ) {
+		if ( this.unstrippedObject.id.length === 0 ) {
 			throw new InvalidEntityException( 'Missing entityid' );
 		}
 
-		if ( !this.UnstrippedObject.hasOwnProperty( 'type' ) ) {
-			throw new InvalidEntityException( `Missing type on entiy ${this.UnstrippedObject.id}` );
+		if ( !this.unstrippedObject.hasOwnProperty( 'type' ) ) {
+			throw new InvalidEntityException( `Missing type on entiy ${this.unstrippedObject.id}` );
 		}
 
-		if ( 'string' !== typeof this.UnstrippedObject.type ) {
+		if ( typeof this.unstrippedObject.type !== 'string' ) {
 			throw new InvalidEntityException( 'Unsupported type of entitytype' );
 		}
 
-		if ( 0 === this.UnstrippedObject.type.length ) {
-			throw new InvalidEntityException( `Missing type on entity ${this.UnstrippedObject.id}` );
+		if ( this.unstrippedObject.type.length === 0 ) {
+			throw new InvalidEntityException( `Missing type on entity ${this.unstrippedObject.id}` );
 		}
 	}
 
-	private getNestedAliases( EntityObject: any ): DictionaryInterface<string[]> {
-		const Return: DictionaryInterface<string[]>  = {};
-		let SubEntries: string[];
-		if ( !EntityObject.hasOwnProperty( 'aliases' ) || 0 === EntityObject.aliases.length ) {
-			return Return;
+	private getNestedAliases( entityObject: any ): DictionaryInterface<string[]> {
+		const aliases: DictionaryInterface<string[]>  = {};
+		let subEntries: string[];
+		if ( !entityObject.hasOwnProperty( 'aliases' ) || entityObject.aliases.length === 0 ) {
+			return aliases;
 		}
 
-		Object.keys( EntityObject.aliases ).forEach( ( LanguageKey: string ) => {
-			SubEntries = [];
-			EntityObject.aliases[ LanguageKey ].forEach( ( Value: any ) => {
-				SubEntries.push( Value.value );
+		Object.keys( entityObject.aliases ).forEach( ( languageKey: string ) => {
+			subEntries = [];
+			entityObject.aliases[ languageKey ].forEach( ( value: any ) => {
+				subEntries.push( value.value );
 			} );
 
-			Return[ LanguageKey ] = SubEntries;
+			aliases[ languageKey ] = subEntries;
 		} );
 
-		return Return;
+		return aliases;
 	}
 }

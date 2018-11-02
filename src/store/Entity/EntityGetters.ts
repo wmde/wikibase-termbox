@@ -21,76 +21,76 @@ export const getters: GetterTree<StateInterface, any> = {
 		 * So far I could not find a way to disable this in inline-mode.
 		 * This rule also applies, if you encapsulate the following pice of code in any sort of function or method.
 		 */
-		if ( 'undefined' === typeof state.Entity || false === state.Entity.IsInit ) {
+		if ( typeof state.Entity === 'undefined' || !state.Entity.IsInit ) {
 			throw new NonInitilizedEntityException();
 		}
 
 		return state.Entity.Id;
 	},
 	[ENTITY_GET_TYPE] ( state: StateInterface ): string {
-		if ( 'undefined' === typeof state.Entity || false === state.Entity.IsInit ) {
+		if ( typeof state.Entity === 'undefined' || !state.Entity.IsInit ) {
 			throw new NonInitilizedEntityException();
 		}
 
 		return state.Entity.Type;
 	},
 	[ENTITY_GET_LABELS] ( state: StateInterface ): DictionaryInterface<string> {
-		if ( 'undefined' === typeof state.Entity || false === state.Entity.IsInit ) {
+		if ( typeof state.Entity === 'undefined' || !state.Entity.IsInit ) {
 			throw new NonInitilizedEntityException();
 		}
 
 		return state.Entity.Labels;
 	},
 	[ENTITY_GET_DESCRIPTIONS] ( state: StateInterface ): DictionaryInterface<string> {
-		if ( 'undefined' === typeof state.Entity || false === state.Entity.IsInit ) {
+		if ( typeof state.Entity === 'undefined' || !state.Entity.IsInit ) {
 			throw new NonInitilizedEntityException();
 		}
 
 		return state.Entity.Descriptions;
 	},
 	[ENTITY_GET_ALIASES] ( state: StateInterface ): DictionaryInterface<string[]> {
-		if ( 'undefined' === typeof state.Entity || false === state.Entity.IsInit ) {
+		if ( typeof state.Entity === 'undefined' || !state.Entity.IsInit ) {
 			throw new NonInitilizedEntityException();
 		}
 
 		return state.Entity.Aliases;
 	},
-	[ENTITY_GET_LABEL_BY_LANGUAGE]: ( state: StateInterface ) => ( LanguageCode: string ): string => {
-		let Return: string = '';
+	[ENTITY_GET_LABEL_BY_LANGUAGE]: ( state: StateInterface ) => ( languageCode: string ): string => {
+		let label: string = '';
 
-		if ( 'undefined' === typeof state.Entity || false === state.Entity.IsInit ) {
+		if ( typeof state.Entity === 'undefined' || !state.Entity.IsInit ) {
 			throw new NonInitilizedEntityException();
 		}
 
-		if ( state.Entity.Labels.hasOwnProperty( LanguageCode ) ) {
-			Return = state.Entity.Labels[ LanguageCode ];
+		if ( state.Entity.Labels.hasOwnProperty( languageCode ) ) {
+			label = state.Entity.Labels[ languageCode ];
 		}
 
-		return Return;
+		return label;
 	},
-	[ENTITY_GET_DESCRIPTION_BY_LANGUAGE]: ( state: StateInterface ) => ( LanguageCode: string ): string => {
-		let Return: string = '';
+	[ENTITY_GET_DESCRIPTION_BY_LANGUAGE]: ( state: StateInterface ) => ( languageCode: string ): string => {
+		let description: string = '';
 
-		if ( 'undefined' === typeof state.Entity || false === state.Entity.IsInit ) {
+		if ( typeof state.Entity === 'undefined' || !state.Entity.IsInit ) {
 			throw new NonInitilizedEntityException();
 		}
 
-		if ( state.Entity.Labels.hasOwnProperty( LanguageCode ) ) {
-			Return = state.Entity.Descriptions[ LanguageCode ];
+		if ( state.Entity.Labels.hasOwnProperty( languageCode ) ) {
+			description = state.Entity.Descriptions[ languageCode ];
 		}
 
-		return Return;
+		return description;
 	},
-	[ENTITY_GET_ALIASES_BY_LANGUAGE]: ( state: StateInterface ) => ( LanguageCode: string ): string[] => {
-		let Return: string[] = [];
+	[ENTITY_GET_ALIASES_BY_LANGUAGE]: ( state: StateInterface ) => ( languageCode: string ): string[] => {
+		let aliases: string[] = [];
 
-		if ( 'undefined' === typeof state.Entity || false === state.Entity.IsInit ) {
+		if ( typeof state.Entity === 'undefined' || !state.Entity.IsInit ) {
 			throw new NonInitilizedEntityException();
 		}
 
-		if ( state.Entity.Labels.hasOwnProperty( LanguageCode ) ) {
-			Return = state.Entity.Aliases[ LanguageCode ];
+		if ( state.Entity.Labels.hasOwnProperty( languageCode ) ) {
+			aliases = state.Entity.Aliases[ languageCode ];
 		}
-		return Return;
+		return aliases;
 	},
 };

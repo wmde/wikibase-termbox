@@ -5,16 +5,16 @@ import { mutations } from '@/store/Language/LanguageMutations';
 import {
 	LANGUAGE_INIT,
 } from '@/store/Language/LanguageMethodNames';
-import InvalidLanguageStripperException from '@/store/Language/exceptions/InvalidLanguageStripperException';
+import InvalidLanguagestripperException from '@/store/Language/exceptions/InvalidLanguageStripperException';
 import {
-	EmptyLanguageState as state,
-	FilledLanguageStripper as Stripper,
+	emptyLanguageState as state,
+	filledLanguageStripper as stripper,
 } from '../data/LanguageStores';
 
 Vue.use( Vuex );
 const namespaced = true;
 
-const StoreBundle: StoreOptions<StateInterface> = {
+const storeBundle: StoreOptions<StateInterface> = {
 	state,
 	mutations,
 };
@@ -22,30 +22,30 @@ const StoreBundle: StoreOptions<StateInterface> = {
 describe( '/store/Language/LanguageMutations.ts', () => {
 	it( 'it throws an error on initilization if an invalid stripper is given', () => {
 		expect( () => {
-			const EmptyStore = new Vuex.Store<StateInterface>( StoreBundle );
-			EmptyStore.commit( `${ LANGUAGE_INIT }`, '' );
-		} ).toThrow( InvalidLanguageStripperException );
+			const emptyStore = new Vuex.Store<StateInterface>( storeBundle );
+			emptyStore.commit( `${ LANGUAGE_INIT }`, '' );
+		} ).toThrow( InvalidLanguagestripperException );
 
 		expect( () => {
-			const EmptyStore = new Vuex.Store<StateInterface>( StoreBundle );
-			EmptyStore.commit( `${ LANGUAGE_INIT }`, [] );
-		} ).toThrow( InvalidLanguageStripperException );
+			const emptyStore = new Vuex.Store<StateInterface>( storeBundle );
+			emptyStore.commit( `${ LANGUAGE_INIT }`, [] );
+		} ).toThrow( InvalidLanguagestripperException );
 
 		expect( () => {
-			const EmptyStore = new Vuex.Store<StateInterface>( StoreBundle );
-			EmptyStore.commit( `${ LANGUAGE_INIT }`, {} );
-		} ).toThrow( InvalidLanguageStripperException );
+			const emptyStore = new Vuex.Store<StateInterface>( storeBundle );
+			emptyStore.commit( `${ LANGUAGE_INIT }`, {} );
+		} ).toThrow( InvalidLanguagestripperException );
 	} );
 
 	it( 'it sets the initial data', () => {
 		function init() {
-			const Store = new Vuex.Store<StateInterface>( StoreBundle );
-			Store.commit(
+			const store = new Vuex.Store<StateInterface>( storeBundle );
+			store.commit(
 				`${ LANGUAGE_INIT }`,
-				Stripper,
+				stripper,
 			);
-			return 'undefined' === typeof Store.state.Language ?
-				false : Store.state.Language.IsInit;
+			return typeof store.state.Language === 'undefined' ?
+				false : store.state.Language.IsInit;
 		}
 
 		expect( init() ).toBeTruthy();
@@ -53,29 +53,29 @@ describe( '/store/Language/LanguageMutations.ts', () => {
 
 	it( 'contains data after initializing', () => {
 		function init() {
-			const Store = new Vuex.Store<StateInterface>( StoreBundle );
-			Store.commit(
+			const store = new Vuex.Store<StateInterface>( storeBundle );
+			store.commit(
 				`${ LANGUAGE_INIT }`,
-				Stripper,
+				stripper,
 			);
-			if ( 'undefined' === typeof Store.state.Language ) {
+			if ( typeof store.state.Language === 'undefined' ) {
 				return [];
 			}
 
 			return [
-				Store.state.Language.Primary,
-				Store.state.Language.More,
-				Store.state.Language.All,
-				Store.state.Language.Labels,
-				Store.state.Language.IsInit,
+				store.state.Language.Primary,
+				store.state.Language.More,
+				store.state.Language.All,
+				store.state.Language.Labels,
+				store.state.Language.IsInit,
 			];
 		}
 
 		expect( init() ).toStrictEqual( [
-			Stripper.getPrimaryLanguage(),
-			Stripper.getMoreLanguages(),
-			Stripper.getAllLanguages(),
-			Stripper.getLabels(),
+			stripper.getPrimaryLanguage(),
+			stripper.getMoreLanguages(),
+			stripper.getAllLanguages(),
+			stripper.getLabels(),
 			true,
 		] );
 	} );

@@ -1,3 +1,4 @@
+/* tslint:disable: variable-name */
 import LogicalException from '@/common/exceptions/LogicalException';
 
 export default class RunTimeException extends LogicalException {

@@ -3,7 +3,7 @@ import Vuex, { Module, StoreOptions } from 'vuex';
 import StateInterface from '@/store/root/StateInterface';
 import * as MockLanguageData from '@/mock-data/data/en_lang_data.json';
 import * as MockEntityData from '@/mock-data/data/Q64_data.json';
-import { getters } from '@/store/root/Getters';
+import { rootGetters as getters } from '@/store/root/Getters';
 import {
 	GET_LABEL,
 	GET_DESCRIPTION,
@@ -12,123 +12,123 @@ import {
 import NonInitilizedLanguageException from '@/store/Language/exceptions/NonInitilizedLanguageException';
 import NonInitilizedEntityException from '@/store/Entity/exceptions/NonInitilizedEntityException';
 import {
-	EmptyEntityModule,
-	FilledEntityStripper as EntityStripper,
-	FilledEntityModule,
+	emptyEntityModule,
+	filledEntityStripper as entityStripper,
+	filledEntityModule,
 } from '../data/EntityStores';
 import {
-	EmptyLanguageModule,
-	FilledLanguageModule,
-	FilledLanguageStripper as LanguageStripper,
+	emptyLanguageModule,
+	filledLanguageModule,
+	filledLanguageStripper as languageStripper,
 } from '../data/LanguageStores';
 
 Vue.use( Vuex );
 
-let Entity: Module<StateInterface, any> = EmptyEntityModule;
-let Language: Module<StateInterface, any> = EmptyLanguageModule;
+let entity: Module<StateInterface, any> = emptyEntityModule;
+let language: Module<StateInterface, any> = emptyLanguageModule;
 
-let StoreBundle: StoreOptions<StateInterface> = {
+let storeBundle: StoreOptions<StateInterface> = {
 	getters,
 	modules: {
-		Entity,
-		Language,
+		entity,
+		language,
 	},
 };
 
-const EmptyStore = new Vuex.Store<StateInterface>( StoreBundle );
+const emptyStore = new Vuex.Store<StateInterface>( storeBundle );
 
-Entity = EmptyEntityModule;
-Language = FilledLanguageModule;
+entity = emptyEntityModule;
+language = filledLanguageModule;
 
-StoreBundle = {
+storeBundle = {
 	getters,
 	modules: {
-		Entity,
-		Language,
+		entity,
+		language,
 	},
 };
 
-const LanguageFilledStore = new Vuex.Store<StateInterface>( StoreBundle );
+const languageFilledStore = new Vuex.Store<StateInterface>( storeBundle );
 
-Entity = FilledEntityModule;
-Language = EmptyLanguageModule;
+entity = filledEntityModule;
+language = emptyLanguageModule;
 
-StoreBundle = {
+storeBundle = {
 	getters,
 	modules: {
-		Entity,
-		Language,
+		entity,
+		language,
 	},
 };
 
-const EntityFilledStore = new Vuex.Store<StateInterface>( StoreBundle );
+const entityFilledStore = new Vuex.Store<StateInterface>( storeBundle );
 
-Entity = FilledEntityModule;
-Language = FilledLanguageModule;
+entity = filledEntityModule;
+language = filledLanguageModule;
 
-StoreBundle = {
+storeBundle = {
 	getters,
 	modules: {
-		Entity,
-		Language,
+		entity,
+		language,
 	},
 };
 
-const FilledStore = new Vuex.Store<StateInterface>( StoreBundle );
+const filledStore = new Vuex.Store<StateInterface>( storeBundle );
 
 describe( '/store/root/Getters.ts', () => {
 	it( 'throws an exception, if it is empty', () => {
 		expect( () => {
-			const ignore = EmptyStore.getters[ GET_LABEL ];
+			const ignore = emptyStore.getters[ GET_LABEL ];
 		} ).toThrow( NonInitilizedLanguageException );
 
 		expect( () => {
-			const ignore = EmptyStore.getters[ GET_DESCRIPTION ];
+			const ignore = emptyStore.getters[ GET_DESCRIPTION ];
 		} ).toThrow( NonInitilizedLanguageException );
 
 		expect( () => {
-			const ignore = EmptyStore.getters[ GET_ALIASES ];
+			const ignore = emptyStore.getters[ GET_ALIASES ];
 		} ).toThrow( NonInitilizedLanguageException );
 	} );
 
 	it( 'throws an exception, if it is partly filled', () => {
 		expect( () => {
-			const ignore = LanguageFilledStore.getters[ GET_LABEL ];
+			const ignore = languageFilledStore.getters[ GET_LABEL ];
 		} ).toThrow( NonInitilizedEntityException );
 
 		expect( () => {
-			const ignore = LanguageFilledStore.getters[ GET_DESCRIPTION ];
+			const ignore = languageFilledStore.getters[ GET_DESCRIPTION ];
 		} ).toThrow( NonInitilizedEntityException );
 
 		expect( () => {
-			const ignore = LanguageFilledStore.getters[ GET_ALIASES ];
+			const ignore = languageFilledStore.getters[ GET_ALIASES ];
 		} ).toThrow( NonInitilizedEntityException );
 
 		expect( () => {
-			const ignore = EntityFilledStore.getters[ GET_LABEL ];
+			const ignore = entityFilledStore.getters[ GET_LABEL ];
 		} ).toThrow( NonInitilizedLanguageException );
 
 		expect( () => {
-			const ignore = EntityFilledStore.getters[ GET_DESCRIPTION ];
+			const ignore = entityFilledStore.getters[ GET_DESCRIPTION ];
 		} ).toThrow( NonInitilizedLanguageException );
 
 		expect( () => {
-			const ignore = EntityFilledStore.getters[ GET_ALIASES ];
+			const ignore = entityFilledStore.getters[ GET_ALIASES ];
 		} ).toThrow( NonInitilizedLanguageException );
 	} );
 
 	it( 'contains a label', () => {
-		expect( FilledStore.getters[ GET_LABEL ] )
-		.toMatch( EntityStripper.getLabels()[ LanguageStripper.getPrimaryLanguage() ] );
+		expect( filledStore.getters[ GET_LABEL ] )
+		.toMatch( entityStripper.getLabels()[ languageStripper.getPrimaryLanguage() ] );
 	} );
 
 	it( 'contains a description', () => {
-		expect( FilledStore.getters[ GET_DESCRIPTION ] )
-		.toMatch( EntityStripper.getDescriptions()[ LanguageStripper.getPrimaryLanguage() ] );
+		expect( filledStore.getters[ GET_DESCRIPTION ] )
+		.toMatch( entityStripper.getDescriptions()[ languageStripper.getPrimaryLanguage() ] );
 	} );
 
 	it( 'contains aliases', () => {
-		expect( FilledStore.getters[ GET_ALIASES ] )
-		.toStrictEqual( EntityStripper.getAliases()[ LanguageStripper.getPrimaryLanguage() ] );
+		expect( filledStore.getters[ GET_ALIASES ] )
+		.toStrictEqual( entityStripper.getAliases()[ languageStripper.getPrimaryLanguage() ] );
 	} );
 } );

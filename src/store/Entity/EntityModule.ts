@@ -4,7 +4,7 @@ import { getters } from '@/store/Entity/EntityGetters';
 import { mutations } from '@/store/Entity/EntityMutations';
 import StateInterface from '@/store/root/StateInterface';
 
-const EntityInit: EntityProperties = {
+const entityInit: EntityProperties = {
 	Id: '',
 	Type: '',
 	Labels: {},
@@ -14,14 +14,14 @@ const EntityInit: EntityProperties = {
 };
 
 const state: StateInterface = {
-	Entity: EntityInit,
+	Entity: entityInit,
 };
 
 const namespaced: boolean = true;
 
-export const Entity: Module<StateInterface, any> = {
+export const entity: Module<StateInterface, any> = {
 	namespaced,
-    state,
+	state,
 	getters,
-    mutations,
+	mutations,
 };

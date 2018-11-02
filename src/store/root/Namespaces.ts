@@ -1,2 +1,2 @@
-export const NS_ENTITY = 'Entity';
-export const NS_LANGUAGE = 'Language';
+export const NS_ENTITY = 'entity';
+export const NS_LANGUAGE = 'language';
