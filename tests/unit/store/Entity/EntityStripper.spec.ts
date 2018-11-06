@@ -1,5 +1,4 @@
 import EntityStripper from '@/store/Entity/EntityStripper';
-import InvalidEntityException from '@/store/Entity/exceptions/InvalidEntityException';
 import * as MockData from '@/mock-data/data/Q64_data.json';
 
 const stripper: EntityStripper = new EntityStripper( MockData.default );
@@ -8,25 +7,30 @@ const emtpyStripper: EntityStripper = new EntityStripper( '{"id":"Q123", "type":
 describe( '/store/Entity/EntityStripper.ts', () => {
 	it( 'throws an error when the entity has no id', () => {
 		expect( () => {
-			const dummy = new EntityStripper( '' );
+			// tslint:disable-next-line: no-unused-expression
+			new EntityStripper( '' );
 		} ).toThrowError( SyntaxError );
 
 		expect( () => {
-			const dummy = new EntityStripper( '{}' );
+			// tslint:disable-next-line: no-unused-expression
+			new EntityStripper( '{}' );
 		} ).toThrowError( 'Missing entityid' );
 
 		expect( () => {
-			const dummy = new EntityStripper( 'justATest' );
+			// tslint:disable-next-line: no-unused-expression
+			new EntityStripper( 'justATest' );
 		} ).toThrowError( SyntaxError );
 
 		expect( () => {
-			const dummy = new EntityStripper( '{"type": "item"}' );
+			// tslint:disable-next-line: no-unused-expression
+			new EntityStripper( '{"type": "item"}' );
 		} ).toThrowError( 'Missing entityid' );
 	} );
 
 	it( 'throws an error when the entity has no type', () => {
 		expect( () => {
-			const dummy = new EntityStripper( '{"id": "Q123"}' );
+			// tslint:disable-next-line: no-unused-expression
+			new EntityStripper( '{"id": "Q123"}' );
 		} ).toThrowError( 'Missing type on entiy Q123' );
 	} );
 

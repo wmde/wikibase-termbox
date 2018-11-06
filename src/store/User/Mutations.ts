@@ -1,5 +1,4 @@
 import { MutationTree } from 'vuex';
-import Properties from '@/store/User/Properties';
 import {
 	LANGUAGE_INIT,
 } from '@/store/User/Mutation.Types';

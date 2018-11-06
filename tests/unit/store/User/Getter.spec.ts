@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Vuex, { Module, StoreOptions } from 'vuex';
 import StateInterface from '@/store/User/StateInterface';
-import { getters } from '@/store/User/Getters';
 import {
 	emptyUserModule,
 	filledUserModule,
@@ -16,8 +15,6 @@ let storeBundle: StoreOptions<StateInterface> = {
 		user,
 	},
 };
-
-const emptyStore = new Vuex.Store<StateInterface>( storeBundle );
 
 user = filledUserModule;
 

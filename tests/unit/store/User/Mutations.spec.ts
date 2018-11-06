@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import Vuex, { StoreOptions, Module } from 'vuex';
+import Vuex, { StoreOptions } from 'vuex';
 import StateInterface from '@/store/User/StateInterface';
 import { mutations } from '@/store/User/Mutations';
 import {
@@ -11,7 +11,6 @@ import {
 import InvalidLanguageValueException from '@/store/User/exceptions/InvalidLanguageValueException';
 
 Vue.use( Vuex );
-const namespaced: boolean = true;
 
 const storeBundle: StoreOptions<StateInterface> = {
 	state,

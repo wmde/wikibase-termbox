@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Vuex, { StoreOptions } from 'vuex';
 import StateInterface from '@/store/Entity/StateInterface';
-import * as MockData from '@/mock-data/data/Q64_data.json';
 import { mutations } from '@/store/Entity/Mutations';
 import {
 	ENTITY_INIT,

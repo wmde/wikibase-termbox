@@ -1,9 +1,7 @@
 import { Module } from 'vuex';
 import Properties from '@/store/User/Properties';
 import StateInterface from '@/store/User/StateInterface';
-import * as MockData from '@/mock-data/data/en_lang_data.json';
 import { getters } from '@/store/User/Getters';
-import Dictionary from '@/common/interfaces/Dictionary';
 
 const namespaced: boolean = false;
 

@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Vuex, { Module, StoreOptions } from 'vuex';
-import EntityProperties from '@/store/Entity/Properties';
 import StateInterface from '@/store/Entity/StateInterface';
 import {
 	filledEntityModule,
@@ -17,8 +16,6 @@ let storeBundle: StoreOptions<StateInterface> = {
 		entity,
 	},
 };
-
-const emptyStore = new Vuex.Store<StateInterface>( storeBundle );
 
 entity = filledEntityModule;
 
