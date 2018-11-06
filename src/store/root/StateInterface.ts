@@ -1,7 +1,7 @@
-import EntityProperties from '@/store/Entity/EntityProperties';
-import LanguageProperties from '@/store/Language/LanguageProperties';
+import EntityProperties from '@/store/Entity/Properties';
+import UserProperties from '@/store/User/Properties';
 
 export default interface StateInterface {
-	Entity?: EntityProperties;
-	Language?: LanguageProperties;
+	Entity: EntityProperties;
+	User: UserProperties;
 }

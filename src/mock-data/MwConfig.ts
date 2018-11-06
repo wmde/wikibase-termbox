@@ -4,8 +4,8 @@ import * as languages from './data/en_lang_data.json';
 export default class MWConfig {
 	public get( key: string ): string {
 		const config: { [ index: string]: string } = {
-			wgULSLanguages: JSON.stringify( languages.default ),
 			wbEntity: JSON.stringify( entity.default ),
+			wgUserLanguage: 'de',
 		};
 
 		return config[ key ];

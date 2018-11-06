@@ -1,4 +1,4 @@
-import DictionaryInterface from '@/common/interfaces/DictionaryInterface';
+import Dictionary from '@/common/interfaces/Dictionary';
 import InvalidEntityException from '@/store/Entity/exceptions/InvalidEntityException';
 import BaseStripper from '@/common/BaseStripper';
 
@@ -21,20 +21,20 @@ export default class EntityStripper extends BaseStripper {
 		return this.unstrippedEntity.type;
 	}
 
-	public getLabels(): DictionaryInterface<string> {
+	public getLabels(): Dictionary<string> {
 		return this.getNestedLabels();
 	}
 
-	public getDescriptions(): DictionaryInterface<string> {
+	public getDescriptions(): Dictionary<string> {
 		return this.getNesatedDescriptions();
 	}
 
-	public getAliases(): DictionaryInterface<string[]> {
+	public getAliases(): Dictionary<string[]> {
 		return this.getNestedAliases( this.unstrippedEntity );
 	}
 
-	private getNestedValues( entityObject: any, index: string ): DictionaryInterface<string> {
-		const value: DictionaryInterface<string> = {};
+	private getNestedValues( entityObject: any, index: string ): Dictionary<string> {
+		const value: Dictionary<string> = {};
 
 		if ( !entityObject.hasOwnProperty( index ) ) {
 			return value;
@@ -46,11 +46,11 @@ export default class EntityStripper extends BaseStripper {
 		return value;
 	}
 
-	private getNestedLabels(): DictionaryInterface<string> {
+	private getNestedLabels(): Dictionary<string> {
 		return this.getNestedValues( this.unstrippedEntity, 'labels' );
 	}
 
-	private getNesatedDescriptions(): DictionaryInterface<string> {
+	private getNesatedDescriptions(): Dictionary<string> {
 		return this.getNestedValues( this.unstrippedEntity, 'descriptions' );
 	}
 
@@ -80,8 +80,8 @@ export default class EntityStripper extends BaseStripper {
 		}
 	}
 
-	private getNestedAliases( entityObject: any ): DictionaryInterface<string[]> {
-		const aliases: DictionaryInterface<string[]>  = {};
+	private getNestedAliases( entityObject: any ): Dictionary<string[]> {
+		const aliases: Dictionary<string[]>  = {};
 		let subEntries: string[];
 		if ( !entityObject.hasOwnProperty( 'aliases' ) || entityObject.aliases.length === 0 ) {
 			return aliases;

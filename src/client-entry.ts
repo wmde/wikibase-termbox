@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import App from '@/components/App.vue';
-import { store } from '@/store/StoreBundle';
-import Vuex from 'vuex';
+import store from '@/store/StoreBundle';
 
 Vue.config.productionTip = false;
 

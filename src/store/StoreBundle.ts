@@ -1,19 +1,17 @@
 import Vue from 'vue';
 import Vuex, { StoreOptions } from 'vuex';
 import StateInterface from '@/store/root/StateInterface';
-import { entity } from '@/store/Entity/EntityModule';
-import { language } from '@/store/Language/LanguageModule';
-import { rootGetters as getters } from '@/store/root/Getters';
+import { entity } from '@/store/Entity/Module';
+import { user } from '@/store/User/Module';
 
 Vue.use( Vuex );
 
 const storeBundle: StoreOptions<StateInterface> = {
-	getters,
 	modules: {
 		entity,
-		language,
+		user,
 	},
 	strict: true,
 };
 
-export const store = new Vuex.Store<StateInterface>( storeBundle );
+export default new Vuex.Store<StateInterface>( storeBundle );
