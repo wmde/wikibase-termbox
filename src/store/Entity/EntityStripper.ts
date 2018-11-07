@@ -1,16 +1,16 @@
 import Dictionary from '@/common/interfaces/Dictionary';
 import InvalidEntityException from '@/store/Entity/exceptions/InvalidEntityException';
-import BaseStripper from '@/common/BaseStripper';
 
-export default class EntityStripper extends BaseStripper {
+export default class EntityStripper {
 	private unstrippedEntity: any;
 
 	constructor( entity: any ) {
-		super( entity );
+		if ( typeof entity === 'string' ) {
+			entity = JSON.parse( entity );
+		}
+
+		this.unstrippedEntity = entity;
 		this.checkPrerequisites();
-		/* see: @/store/Language/LanguageStripper */
-		this.unstrippedEntity = this.unstrippedObject;
-		this.unstrippedObject = '';
 	}
 
 	public getId(): string {
@@ -55,28 +55,28 @@ export default class EntityStripper extends BaseStripper {
 	}
 
 	private checkPrerequisites(): void {
-		if ( !this.unstrippedObject.hasOwnProperty( 'id' ) ) {
+		if ( !this.unstrippedEntity.hasOwnProperty( 'id' ) ) {
 			throw new InvalidEntityException( 'Missing entityid' );
 		}
 
-		if ( typeof this.unstrippedObject.id !== 'string' ) {
+		if ( typeof this.unstrippedEntity.id !== 'string' ) {
 			throw new InvalidEntityException( 'Unsupported type of entityid' );
 		}
 
-		if ( this.unstrippedObject.id.length === 0 ) {
+		if ( this.unstrippedEntity.id.length === 0 ) {
 			throw new InvalidEntityException( 'Missing entityid' );
 		}
 
-		if ( !this.unstrippedObject.hasOwnProperty( 'type' ) ) {
-			throw new InvalidEntityException( `Missing type on entiy ${this.unstrippedObject.id}` );
+		if ( !this.unstrippedEntity.hasOwnProperty( 'type' ) ) {
+			throw new InvalidEntityException( `Missing type on entiy ${this.unstrippedEntity.id}` );
 		}
 
-		if ( typeof this.unstrippedObject.type !== 'string' ) {
+		if ( typeof this.unstrippedEntity.type !== 'string' ) {
 			throw new InvalidEntityException( 'Unsupported type of entitytype' );
 		}
 
-		if ( this.unstrippedObject.type.length === 0 ) {
-			throw new InvalidEntityException( `Missing type on entity ${this.unstrippedObject.id}` );
+		if ( this.unstrippedEntity.type.length === 0 ) {
+			throw new InvalidEntityException( `Missing type on entity ${this.unstrippedEntity.id}` );
 		}
 	}
 
