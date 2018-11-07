@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex, { Module, StoreOptions } from 'vuex';
-import StateInterface from '@/store/Entity/StateInterface';
+import Properties from '@/store/Entity/Properties';
 import {
 	filledEntityModule,
 	filledEntityStripper as stripper,
@@ -9,9 +9,9 @@ import {
 
 Vue.use( Vuex );
 
-let entity: Module<StateInterface, any>  = emptyEntityModule;
+let entity: Module<Properties, any>  = emptyEntityModule;
 
-let storeBundle: StoreOptions<StateInterface> = {
+let storeBundle: StoreOptions<Properties> = {
 	modules: {
 		entity,
 	},
@@ -25,7 +25,7 @@ storeBundle = {
 	},
 };
 
-const filledStore = new Vuex.Store<StateInterface>( storeBundle );
+const filledStore = new Vuex.Store<Properties>( storeBundle );
 
 describe( '/store/Entity/Getters.ts', () => {
 	/* id */

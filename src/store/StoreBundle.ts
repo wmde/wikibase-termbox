@@ -1,17 +1,17 @@
 import Vue from 'vue';
 import Vuex, { StoreOptions } from 'vuex';
-import StateInterface from '@/store/root/StateInterface';
 import { entity } from '@/store/Entity/Module';
 import { user } from '@/store/User/Module';
 
 Vue.use( Vuex );
 
-const storeBundle: StoreOptions<StateInterface> = {
+// any should be replaces if root gets properties
+const storeBundle: StoreOptions<any> = {
 	modules: {
 		entity,
 		user,
 	},
-	strict: true,
+	strict: process.env.NODE_ENV !== 'production',
 };
 
-export default new Vuex.Store<StateInterface>( storeBundle );
+export default new Vuex.Store<any>( storeBundle );

@@ -1,8 +1,8 @@
 import { GetterTree } from 'vuex';
-import StateInterface from '@/store/User/StateInterface';
+import Properties from '@/store/User/Properties';
 
-export const getters: GetterTree<StateInterface, any> = {
-	getPrimaryLanguage( state: StateInterface ) {
-		return state.User.PrimaryLanguage;
+export const getters: GetterTree<Properties, any> = {
+	getPrimaryLanguage( state: Properties ) {
+		return state.PrimaryLanguage;
 	},
 };

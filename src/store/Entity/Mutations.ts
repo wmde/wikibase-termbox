@@ -4,17 +4,15 @@ import EntityMutationHelper from '@/store/Entity/EntityMutationHelper';
 import {
 	ENTITY_INIT,
 } from '@/store/Entity/Mutation.Types';
-import StateInterface from '@/store/Entity/StateInterface';
+import Properties from '@/store/Entity/Properties';
 
-export const mutations: MutationTree<StateInterface> = {
-	[ENTITY_INIT] ( state: StateInterface, stripper: EntityStripper ): void {
+export const mutations: MutationTree<Properties> = {
+	[ENTITY_INIT] ( state: Properties, stripper: EntityStripper ): void {
 		EntityMutationHelper.isEntityStipper( stripper );
-		state.Entity = {
-			Id: stripper.getId(),
-			Type: stripper.getType(),
-			Labels: stripper.getLabels(),
-			Descriptions: stripper.getDescriptions(),
-			Aliases: stripper.getAliases(),
-		};
+		state.Id = stripper.getId();
+		state.Type = stripper.getType();
+		state.Labels = stripper.getLabels();
+		state.Descriptions = stripper.getDescriptions();
+		state.Aliases = stripper.getAliases();
 	},
 };

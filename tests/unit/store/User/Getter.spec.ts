@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex, { Module, StoreOptions } from 'vuex';
-import StateInterface from '@/store/User/StateInterface';
+import Properties from '@/store/User/Properties';
 import {
 	emptyUserModule,
 	filledUserModule,
@@ -8,9 +8,9 @@ import {
 
 Vue.use( Vuex );
 
-let user: Module<StateInterface, any> = emptyUserModule;
+let user: Module<Properties, any> = emptyUserModule;
 
-let storeBundle: StoreOptions<StateInterface> = {
+let storeBundle: StoreOptions<Properties> = {
 	modules: {
 		user,
 	},
@@ -24,7 +24,7 @@ storeBundle = {
 	},
 };
 
-const filledStore = new Vuex.Store<StateInterface>( storeBundle );
+const filledStore = new Vuex.Store<Properties>( storeBundle );
 
 describe( '/store/User/Getters.ts', () => {
 	it( 'returns the primary language key', () => {

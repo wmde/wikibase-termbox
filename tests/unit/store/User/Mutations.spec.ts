@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex, { StoreOptions } from 'vuex';
-import StateInterface from '@/store/User/StateInterface';
+import Properties from '@/store/User/Properties';
 import { mutations } from '@/store/User/Mutations';
 import {
 	LANGUAGE_INIT,
@@ -12,33 +12,33 @@ import InvalidLanguageValueException from '@/store/User/exceptions/InvalidLangua
 
 Vue.use( Vuex );
 
-const storeBundle: StoreOptions<StateInterface> = {
+const storeBundle: StoreOptions<Properties> = {
 	state,
 	mutations,
 };
 
-describe( '/store/Language/LanguageMutations.ts', () => {
+describe( '/store/User/Mutations.ts', () => {
 		expect( () => {
-			const emptyStore = new Vuex.Store<StateInterface>( storeBundle );
+			const emptyStore = new Vuex.Store<Properties>( storeBundle );
 			emptyStore.commit( `${ LANGUAGE_INIT }`, {} );
 		} ).toThrow( InvalidLanguageValueException );
 
 		expect( () => {
-			const emptyStore = new Vuex.Store<StateInterface>( storeBundle );
+			const emptyStore = new Vuex.Store<Properties>( storeBundle );
 			emptyStore.commit( `${ LANGUAGE_INIT }`, 'e' );
 		} ).toThrow( InvalidLanguageValueException );
 	} );
 
 it( 'contains data after initializing', () => {
 		function init() {
-			const store = new Vuex.Store<StateInterface>( storeBundle );
+			const store = new Vuex.Store<Properties>( storeBundle );
 			store.commit(
 				`${ LANGUAGE_INIT }`,
 				'de',
 			);
 
 			return [
-				store.state.User.PrimaryLanguage,
+				store.state.PrimaryLanguage,
 			];
 		}
 

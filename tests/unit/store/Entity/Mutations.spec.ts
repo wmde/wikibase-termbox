@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import Vuex, { StoreOptions } from 'vuex';
-import StateInterface from '@/store/Entity/StateInterface';
+import Properties from '@/store/Entity/Properties';
 import { mutations } from '@/store/Entity/Mutations';
+import { getters } from '@/store/Entity/Getters';
 import {
 	ENTITY_INIT,
 } from '@/store/Entity/Mutation.Types';
@@ -13,43 +14,44 @@ import InvalidEntitystripperException from '@/store/Entity/exceptions/InvalidEnt
 
 Vue.use( Vuex );
 
-const storeOps: StoreOptions<StateInterface> = {
+const storeOps: StoreOptions<Properties> = {
 	state,
 	mutations,
+	getters,
 };
 
 describe( '/store/Entity/Mutations.ts', () => {
 	it( 'it throws an error on initilization if an invalid object is given', () => {
 		expect( () => {
-			const store = new Vuex.Store<StateInterface>( storeOps );
+			const store = new Vuex.Store<Properties>( storeOps );
 			store.commit( ENTITY_INIT, '' );
 		} ).toThrow( InvalidEntitystripperException );
 
 		expect( () => {
-			const store = new Vuex.Store<StateInterface>( storeOps );
+			const store = new Vuex.Store<Properties>( storeOps );
 			store.commit( ENTITY_INIT, [] );
 		} ).toThrow( InvalidEntitystripperException );
 
 		expect( () => {
-			const store = new Vuex.Store<StateInterface>( storeOps );
+			const store = new Vuex.Store<Properties>( storeOps );
 			store.commit( ENTITY_INIT, {} );
 		} ).toThrow( InvalidEntitystripperException );
 	} );
 
 	it( 'it contains data after initilization', () => {
 		function init() {
-			const store = new Vuex.Store<StateInterface>( storeOps );
+			const store = new Vuex.Store<Properties>( storeOps );
 			store.commit( ENTITY_INIT, stripper );
-			if ( typeof store.state.Entity === 'undefined' ) {
+			if ( typeof store.state === 'undefined' ) {
 				return [];
 			}
 
 			return [
-				store.state.Entity.Id,
-				store.state.Entity.Type,
-				store.state.Entity.Labels,
-				store.state.Entity.Descriptions,
-				store.state.Entity.Aliases,
+				store.state.Id,
+				store.state.Type,
+				store.state.Labels,
+				store.state.Descriptions,
+				store.state.Aliases,
 			];
 		}
 

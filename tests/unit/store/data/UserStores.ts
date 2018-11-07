@@ -1,37 +1,28 @@
 import { Module } from 'vuex';
 import Properties from '@/store/User/Properties';
-import StateInterface from '@/store/User/StateInterface';
 import { getters } from '@/store/User/Getters';
 
 const namespaced: boolean = false;
 
-let user: Properties = {
+let state: Properties = {
 	PrimaryLanguage: '',
 };
 
-let state: StateInterface = {
-	User: user,
-};
+export const emptyUserState: Properties = state;
 
-export const emptyUserState: StateInterface = state;
-
-export const emptyUserModule: Module<StateInterface, any> = {
+export const emptyUserModule: Module<Properties, any> = {
 	namespaced,
 	state,
 	getters,
 };
 
-user = {
+state = {
 	PrimaryLanguage: 'de',
 };
 
-state = {
-	User: user,
-};
+export const filledUserState: Properties = state;
 
-export const filledUserState: StateInterface = state;
-
-export const filledUserModule: Module<StateInterface, any> = {
+export const filledUserModule: Module<Properties, any> = {
 	namespaced,
 	state,
 	getters,
