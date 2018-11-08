@@ -1,4 +1,4 @@
-import TypeException from '@/common/exceptions/LogicException';
+import TypeException from '@/common/exceptions/TypeException';
 
 export default class ParameterException extends TypeException {
 	constructor( message?: string ) {
