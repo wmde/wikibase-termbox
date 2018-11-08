@@ -1,39 +1,39 @@
 import { Module } from 'vuex';
-import EntityStripper from '@/store/Entity/EntityStripper';
-import Properties from '@/store/Entity/Properties';
-import { getters } from '@/store/Entity/Getters';
+import EntityInitializer from '@/store/entity/EntityInitializer';
+import Entity from '@/store/entity/Entity';
+import EntityClass from '@/common/Entity';
+import { getters } from '@/store/entity/getters';
 import * as MockData from '@/mock-data/data/Q64_data.json';
 
 const namespaced: boolean = false;
-export const emptyEntityStripper: EntityStripper = new EntityStripper( { id: 'Q123', type: 'item' } );
-export const filledEntityStripper: EntityStripper = new EntityStripper( MockData.default );
+export const emptyEntity: EntityClass = EntityInitializer.initializeEntity( { id: 'Q123', type: 'item' } );
+export const filledEntity: EntityClass = EntityInitializer.initializeEntity( MockData.default );
 
-let state: Properties = {
-	Id: '',
-	Type: '',
-	Labels: {},
-	Descriptions: {},
-	Aliases: {},
+let state: Entity = {
+	id: '',
+	type: '',
+	labels: {},
+	descriptions: {},
+	aliases: {},
 };
 
-export const emptyEntityState: Properties = state;
-export const emptyEntityModule: Module<Properties, any> = {
+export const emptyEntityType: Entity = state;
+export const emptyEntityModule: Module<Entity, any> = {
 	namespaced,
 	state,
 	getters,
 };
 
 state = {
-	Id: filledEntityStripper.getId(),
-	Type: filledEntityStripper.getType(),
-	Labels: filledEntityStripper.getLabels(),
-	Descriptions: filledEntityStripper.getDescriptions(),
-	Aliases: filledEntityStripper.getAliases(),
+	id: filledEntity.id,
+	type: filledEntity.type,
+	labels: filledEntity.labels,
+	descriptions: filledEntity.descriptions,
+	aliases: filledEntity.aliases,
 };
 
-export const filledEntityState: Properties = state;
-
-export const filledEntityModule: Module<Properties, any> = {
+export const filledEntityType: Entity = state;
+export const filledEntityModule: Module<Entity, any> = {
 	namespaced,
 	state,
 	getters,

@@ -1,4 +1,4 @@
-export default class LogicalException extends Error {
+export default class LogicException extends Error {
 	constructor( message?: string ) {
 		super();
 		if ( typeof message !== 'undefined' ) {
@@ -6,7 +6,7 @@ export default class LogicalException extends Error {
 		}
 
 		if ( Error.captureStackTrace ) {
-			Error.captureStackTrace( this, LogicalException );
+			Error.captureStackTrace( this, LogicException );
 		}
 	}
 }

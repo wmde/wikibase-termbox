@@ -1,4 +1,4 @@
-export default class TypeExcpetion extends TypeError {
+export default class TypeException extends TypeError {
 	constructor( message?: string ) {
 		super();
 		if ( typeof message !== 'undefined' ) {
@@ -6,7 +6,7 @@ export default class TypeExcpetion extends TypeError {
 		}
 
 		if ( Error.captureStackTrace ) {
-			Error.captureStackTrace( this, TypeExcpetion );
+			Error.captureStackTrace( this, TypeException );
 		}
 	}
 }
