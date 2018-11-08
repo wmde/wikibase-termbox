@@ -1,5 +1,5 @@
 import Dictionary from '@/common/interfaces/Dictionary';
-import InvalidLanguageLabelInputException from '@/store/LanguageLabels/exceptions/InvalidLanguageLabelInputException';
+import InvalidLanguageLabelInputException from '@/store/languageLabels/exceptions/InvalidLanguageLabelInputException';
 
 export default class LanguageLabelsMutationHelper {
 	public static isDictionary( dict: Dictionary<Dictionary<string>> ): void {

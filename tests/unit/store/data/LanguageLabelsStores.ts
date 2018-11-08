@@ -1,28 +1,28 @@
 import { Module } from 'vuex';
-import Properties from '@/store/LanguageLabels/Properties';
+import LanguageLabels from '@/store/languageLabels/LanguageLabels';
 import * as MockData from '@/mock-data/data/en_lang_data.json';
-import { getters } from '@/store/LanguageLabels/Getters';
+import { getters } from '@/store/languageLabels/getters';
 
 const namespaced: boolean = false;
 
-let state: Properties = {
-	Labels: {},
+let state: LanguageLabels = {
+	labels: {},
 };
-export const emptyLanguageLabelsState: Properties = state;
-export const emptyLanguageLabelsModule: Module<Properties, any> = {
+export const emptyLanguageLabels: LanguageLabels = state;
+export const emptyLanguageLabelsModule: Module<LanguageLabels, any> = {
 	namespaced,
 	state,
 	getters,
 };
 
 state = {
-	Labels: {
+	labels: {
 		en: MockData.default,
 	},
 };
 
-export const filledLanguageLabelsState: Properties = state;
-export const filledLanguageLabelsModule: Module<Properties, any> = {
+export const filledLanguageLabels: LanguageLabels = state;
+export const filledLanguageLabelsModule: Module<LanguageLabels, any> = {
 	namespaced,
 	state,
 	getters,
