@@ -17,13 +17,13 @@ describe( '/store/Entity/EntityStripper.ts', () => {
 		} ).toThrowError( SyntaxError );
 
 		expect( () => {
-			EntityInitializer.initializeEntity(( '{"type": "item"}') );
+			EntityInitializer.initializeEntity( ( '{"type": "item"}' ) );
 		} ).toThrowError( 'Missing entityid' );
 	} );
 
 	it( 'throws an error when the entity has no type', () => {
 		expect( () => {
-			(EntityInitializer.initializeEntity( '{"id": "Q123"}') );
+			( EntityInitializer.initializeEntity( '{"id": "Q123"}' ) );
 		} ).toThrowError( 'Missing type on entiy Q123' );
 	} );
 
@@ -34,7 +34,7 @@ describe( '/store/Entity/EntityStripper.ts', () => {
 
 	it( 'has a entity type', () => {
 		const entity: Entity = EntityInitializer.initializeEntity( '{"id":"Q123", "type":"item" }' );
-		expect( entity.type  ).toMatch( 'item' );
+		expect( entity.type ).toMatch( 'item' );
 	} );
 
 	it( 'has labels', () => {

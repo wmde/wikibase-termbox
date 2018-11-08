@@ -1,6 +1,6 @@
 import {
 	filledEntity as entity,
-	filledEntityType
+	filledEntityType,
 } from '../data/EntityStores';
 import { getters } from '@/store/entity/getters';
 
@@ -29,40 +29,40 @@ describe( '/store/Entity/Getters.ts', () => {
 		expect( getters.labels( filledEntityType, null, null, null ) )
 			.toStrictEqual( entity.labels );
 	} );
-	
+
 	it( 'returns on label, refered by LanguagesCode', () => {
-		expect( 
-			getters.getLabelByLanguage( filledEntityType, null, null, null )( 'de' )
+		expect(
+			getters.getLabelByLanguage( filledEntityType, null, null, null )( 'de' ),
 		).toMatch( entity.labels.de );
 	} );
 
 	it( 'return an empty string for a unknown LanguagesCode at labels', () => {
-		expect( 
-			getters.getLabelByLanguage( filledEntityType, null, null, null)( 'whatEver' ) 
+		expect(
+			getters.getLabelByLanguage( filledEntityType, null, null, null )( 'whatEver' ),
 		).toMatch( '' );
 	} );
 
 	it( 'returns on description, refered by LanguagesCode', () => {
-		expect( 
-			getters.getDescriptionByLanguage( filledEntityType, null, null, null )( 'de' )
+		expect(
+			getters.getDescriptionByLanguage( filledEntityType, null, null, null )( 'de' ),
 		).toMatch( entity.descriptions.de );
 	} );
 
 	it( 'return an empty string for a unknown LanguagesCode at descriptions', () => {
-		expect( 
-			getters.getDescriptionByLanguage( filledEntityType, null, null, null )( 'whatEver' )
+		expect(
+			getters.getDescriptionByLanguage( filledEntityType, null, null, null )( 'whatEver' ),
 		).toMatch( '' );
 	} );
 
 	it( 'returns on aliases, refered by LanguagesCode', () => {
-		expect( 
-			getters.getAliasesByLanguage( filledEntityType, null, null, null )( 'de' ) 
+		expect(
+			getters.getAliasesByLanguage( filledEntityType, null, null, null )( 'de' ),
 		).toStrictEqual( entity.aliases.de );
 	} );
 
 	it( 'return an empty string for a unknown LanguagesCode at aliases', () => {
-		expect( 
-			getters.getAliasesByLanguage( filledEntityType, null, null, null )( 'whatEver' )
+		expect(
+			getters.getAliasesByLanguage( filledEntityType, null, null, null )( 'whatEver' ),
 		).toStrictEqual( [] );
 	} );
 } );

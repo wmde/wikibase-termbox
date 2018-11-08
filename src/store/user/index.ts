@@ -4,7 +4,7 @@ import { getters } from '@/store/user/getters';
 import { mutations } from '@/store/user/mutations';
 
 const state: User = {
-	PrimaryLanguage: '',
+	primaryLanguage: '',
 };
 
 const namespaced: boolean = true;

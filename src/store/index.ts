@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex, { StoreOptions } from 'vuex';
-import { entity } from '@/store/Entity/Module';
-import { user } from '@/store/User/Module';
+import { entity } from '@/store/entity/index';
+import { user } from '@/store/user/index';
 
 Vue.use( Vuex );
 

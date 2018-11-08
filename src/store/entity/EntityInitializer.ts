@@ -1,8 +1,24 @@
 import Dictionary from '@/common/interfaces/Dictionary';
 import EntityClass from '@/common/Entity';
-import InvalidEntityException from '@/common/exceptions/LogicException';
+import InvalidRawEntityException from '@/store/entity/exceptions/InvalidRawEntityException';
 
 export default class EntityInitializer {
+
+	public static initializeEntity( entity: any ) {
+		if ( typeof entity === 'string' ) {
+			entity = JSON.parse( entity );
+		}
+
+		EntityInitializer.unstrippedEntity = entity;
+		EntityInitializer.validateEntity();
+		return new EntityClass(
+			EntityInitializer.getId(),
+			EntityInitializer.getType(),
+			EntityInitializer.getLabels(),
+			EntityInitializer.getDescriptions(),
+			EntityInitializer.getAliases(),
+		);
+	}
 
 	private static unstrippedEntity: any;
 
@@ -10,7 +26,7 @@ export default class EntityInitializer {
 		return EntityInitializer.unstrippedEntity.id;
 	}
 
-	private static getType(): string {
+	private static getType(): 'item' | 'property' {
 		return EntityInitializer.unstrippedEntity.type;
 	}
 
@@ -49,27 +65,27 @@ export default class EntityInitializer {
 
 	private static validateEntity(): void {
 		if ( !EntityInitializer.unstrippedEntity.hasOwnProperty( 'id' ) ) {
-			throw new InvalidEntityException( 'Missing entityid' );
+			throw new InvalidRawEntityException( 'Missing entityid' );
 		}
 
 		if ( typeof EntityInitializer.unstrippedEntity.id !== 'string' ) {
-			throw new InvalidEntityException( 'Unsupported type of entityid' );
+			throw new InvalidRawEntityException( 'Unsupported type of entityid' );
 		}
 
 		if ( EntityInitializer.unstrippedEntity.id.length === 0 ) {
-			throw new InvalidEntityException( 'Missing entityid' );
+			throw new InvalidRawEntityException( 'Missing entityid' );
 		}
 
 		if ( !EntityInitializer.unstrippedEntity.hasOwnProperty( 'type' ) ) {
-			throw new InvalidEntityException( `Missing type on entiy ${EntityInitializer.unstrippedEntity.id}` );
+			throw new InvalidRawEntityException( `Missing type on entiy ${EntityInitializer.unstrippedEntity.id}` );
 		}
 
 		if ( typeof EntityInitializer.unstrippedEntity.type !== 'string' ) {
-			throw new InvalidEntityException( 'Unsupported type of entitytype' );
+			throw new InvalidRawEntityException( 'Unsupported type of entitytype' );
 		}
 
 		if ( EntityInitializer.unstrippedEntity.type.length === 0 ) {
-			throw new InvalidEntityException( `Missing type on entity ${EntityInitializer.unstrippedEntity.id}` );
+			throw new InvalidRawEntityException( `Missing type on entity ${EntityInitializer.unstrippedEntity.id}` );
 		}
 	}
 
@@ -90,21 +106,5 @@ export default class EntityInitializer {
 		} );
 
 		return aliases;
-	}
-
-	public static initializeEntity( entity: any ) {
-		if ( typeof entity === 'string' ) {
-			entity = JSON.parse( entity );
-		}
-
-		EntityInitializer.unstrippedEntity = entity;
-		EntityInitializer.validateEntity();
-		return new EntityClass( 
-			EntityInitializer.getId(),
-			EntityInitializer.getType(),
-			EntityInitializer.getLabels(),
-			EntityInitializer.getDescriptions(),
-			EntityInitializer.getAliases()
-		);
 	}
 }

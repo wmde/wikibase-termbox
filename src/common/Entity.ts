@@ -3,17 +3,17 @@ import Dictionary from '@/common/interfaces/Dictionary';
 
 export default class Entity implements EntityType {
 	public readonly id: string;
-	public readonly type: string;
+	public readonly type: 'item' | 'property';
 	public readonly labels: Dictionary<string>;
 	public readonly descriptions: Dictionary<string>;
 	public readonly aliases: Dictionary<string[]>;
 
-	constructor( 
+	constructor(
 		id: string,
-		type: string,
+		type: 'item' | 'property',
 		labels: Dictionary<string>,
 		descriptions: Dictionary<string>,
-		aliases: Dictionary<string[]>
+		aliases: Dictionary<string[]>,
 	) {
 		this.id = id;
 		this.type = type;

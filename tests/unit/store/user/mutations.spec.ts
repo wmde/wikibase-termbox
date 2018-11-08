@@ -5,7 +5,7 @@ import {
 import {
 	emptyUserType,
 } from '../data/UserStores';
-import InvalidLanguageValueException from '@/common/exceptions/TypeException';
+import InvalidLanguageValueException from '@/store/user/exceptions/InvalidLanguageValueException';
 
 describe( '/store/user/mutations.ts', () => {
 	it( 'throws a exceptions if the given type is invalid during initialisation', () => {
@@ -17,7 +17,7 @@ describe( '/store/user/mutations.ts', () => {
 			mutations[`${ LANGUAGE_INIT }`]( emptyUserType, 'e' );
 		} ).toThrow( InvalidLanguageValueException );
 	} );
-	
+
 	it( 'contains data after initializing', () => {
 		function init() {
 			mutations[`${ LANGUAGE_INIT }`] ( emptyUserType, 'de' );

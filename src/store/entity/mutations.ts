@@ -4,12 +4,12 @@ import Entity from '@/store/entity/Entity';
 import {
 	ENTITY_INIT,
 } from '@/store/entity/mutationTypes';
-import InvalidEntityParameterException from '@/common/exceptions/TypeException';
+import InvalidEntityException from '@/store/entity/exceptions/InvalidEntityException';
 
 export const mutations: MutationTree<Entity> = {
 	[ENTITY_INIT] ( state: Entity, entity: EntityClass ): void {
-		if( !( entity instanceof EntityClass ) ) {
-			throw new InvalidEntityParameterException;
+		if ( !( entity instanceof EntityClass ) ) {
+			throw new InvalidEntityException();
 		}
 
 		state.id = entity.id;

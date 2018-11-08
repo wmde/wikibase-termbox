@@ -6,27 +6,26 @@ import {
 	emptyEntityType,
 	filledEntity as entity,
 } from '../data/EntityStores';
-import InvalidEntityException from '@/common/exceptions/TypeException';
+import InvalidEntityException from '@/store/entity/exceptions/InvalidEntityException';
 
-
-describe( '/store/Entity/Mutations.ts', () => {
+describe( '/store/entity/mutations.ts', () => {
 	it( 'it throws an error on initilization if an invalid object is given', () => {
 		expect( () => {
-			mutations[ENTITY_INIT](emptyEntityType, '' );
+			mutations[ENTITY_INIT]( emptyEntityType, '' );
 		} ).toThrow( InvalidEntityException );
-		
+
 		expect( () => {
-			mutations[ENTITY_INIT](emptyEntityType, [] );
+			mutations[ENTITY_INIT]( emptyEntityType, [] );
 		} ).toThrow( InvalidEntityException );
-		
+
 		expect( () => {
-			mutations[ENTITY_INIT](emptyEntityType, { id: 'whatEver' } );
+			mutations[ENTITY_INIT]( emptyEntityType, { id: 'whatEver' } );
 		} ).toThrow( InvalidEntityException );
 	} );
 
 	it( 'it contains data after initilization', () => {
 		function init() {
-			mutations[ENTITY_INIT](emptyEntityType, entity );
+			mutations[ENTITY_INIT]( emptyEntityType, entity );
 
 			return [
 				emptyEntityType.id,
