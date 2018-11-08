@@ -30,7 +30,7 @@ export const getters: GetterTree<Entity, any> = {
 	getDescriptionByLanguage: ( state: Entity ) => ( languageCode: string ): string => {
 		let description: string = '';
 
-		if ( state.labels.hasOwnProperty( languageCode ) ) {
+		if ( state.descriptions.hasOwnProperty( languageCode ) ) {
 			description = state.descriptions[ languageCode ];
 		}
 
@@ -39,7 +39,7 @@ export const getters: GetterTree<Entity, any> = {
 	getAliasesByLanguage: ( state: Entity ) => ( languageCode: string ): string[] => {
 		let aliases: string[] = [];
 
-		if ( state.labels.hasOwnProperty( languageCode ) ) {
+		if ( state.aliases.hasOwnProperty( languageCode ) ) {
 			aliases = state.aliases[ languageCode ];
 		}
 		return aliases;

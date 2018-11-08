@@ -1,7 +1,6 @@
-import EntityType from '@/common/interfaces/EntityType';
 import Dictionary from '@/common/interfaces/Dictionary';
 
-export default class Entity implements EntityType {
+export default class FingerprintableEntity {
 	public readonly id: string;
 	public readonly type: 'item' | 'property';
 	public readonly labels: Dictionary<string>;
@@ -21,4 +20,5 @@ export default class Entity implements EntityType {
 		this.descriptions = descriptions;
 		this.aliases = aliases;
 	}
+
 }

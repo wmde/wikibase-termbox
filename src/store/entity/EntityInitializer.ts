@@ -1,6 +1,6 @@
 import Dictionary from '@/common/interfaces/Dictionary';
-import EntityClass from '@/common/Entity';
 import InvalidRawEntityException from '@/store/entity/exceptions/InvalidRawEntityException';
+import FingerprintableEntity from '@/datamodel/FingerprintableEntity';
 
 export default class EntityInitializer {
 
@@ -11,7 +11,7 @@ export default class EntityInitializer {
 
 		EntityInitializer.unstrippedEntity = entity;
 		EntityInitializer.validateEntity();
-		return new EntityClass(
+		return new FingerprintableEntity(
 			EntityInitializer.getId(),
 			EntityInitializer.getType(),
 			EntityInitializer.getLabels(),

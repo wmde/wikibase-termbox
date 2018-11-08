@@ -1,3 +1,9 @@
-import EntityType from '@/common/interfaces/EntityType';
-// tslint:disable-next-line: no-empty-interface
-export default interface Entity extends EntityType {}
+import Dictionary from '@/common/interfaces/Dictionary';
+
+export default interface Entity {
+	id: string;
+	type: 'item' | 'property' | '';
+	labels: Dictionary<string>;
+	descriptions: Dictionary<string>;
+	aliases: Dictionary<string[]>;
+}
