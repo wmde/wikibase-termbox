@@ -1,6 +1,6 @@
 <template>
 	<div>
-		{{message}}
+		requested entity "{{requestContext.entity}}" in "{{requestContext.language}}"
 		<TermBox/>
 	</div>
 </template>
@@ -16,7 +16,10 @@ import TermBox from './TermBox.vue';
 	},
 } )
 export default class App extends Vue {
-	public message = 'Hello world!';
+	public requestContext = {
+		entity: null,
+		language: null,
+	};
 }
 </script>
 

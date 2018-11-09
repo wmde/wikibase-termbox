@@ -10,8 +10,8 @@ const renderer = createBundleRenderer(
 );
 
 app.get( '/termbox', ( _, res ) => {
-	const context = {
-		message: 'Hello from server',
+	const context: object = {
+		..._.query,
 	};
 	renderer.renderToString( context )
 		.then( ( html ) => {
@@ -19,6 +19,8 @@ app.get( '/termbox', ( _, res ) => {
 		} )
 		.catch( ( err ) => {
 			console.log( err );
+			// todo dynamic http code / body depending on situation
+			res.status( 500 ).send( 'bad things happened' );
 		} );
 } );
 
