@@ -6,14 +6,10 @@
     "serve": "WEBPACK_TARGET=dev vue-cli-service serve",
     "dev-server": "concurrently \"tsc -w --project tsconfig.server.json\" \"nodemon serverBuild/server.js\"",
     "build": "NODE_ENV=production vue-cli-service build",
-    "build-server": "WEBPACK_TARGET=node vue-cli-service build && tsc --project tsconfig.server.json",
-    "lint-client": "tslint --project tsconfig.json -c tslint.json",
-    "fix-client": "tslint --fix --project tsconfig.json -c tslint.json",
-    "lint-server": "tslint --project tsconfig.server.json -c tslint.json",
-    "fix-server": "tslint --fix --project tsconfig.server.json -c tslint.json",
-    "lint": "npm run lint-client; npm run lint-server",
-    "fix": "npm run fix-client; npm run fix-server",
-    "test": "vue-cli-service test:unit"
+    "build-server": "npm run copyClient; WEBPACK_TARGET=node vue-cli-service build",
+    "lint": "tslint --format codeFrame --project tsconfig.all.json -c tslint.json",
+    "fix": "tslint --format codeFrame --fix --project tsconfig.all.json -c tslint.json",
+    "test": "vue-cli-service test:unit;"
   },
   "dependencies": {
     "dotenv": "^6.1.0",
