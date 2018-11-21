@@ -5,7 +5,16 @@ import MwWindow from '../../../src/client/MwWindow';
 
 function mockMwEnv( language: string, entity: any ) {
 	( window as MwWindow ).mw = {
-		config: { get() { return language; } },
+		config: { get( key ) {
+			switch ( key ) {
+				case 'wgUserLanguage':
+					return language;
+				case 'wbEntityId':
+					return entity.id;
+				default:
+					return null;
+			}
+		} },
 		hook: () => new ImmediatelyInvokingEntityLoadedHookHandler( entity ),
 	};
 }
@@ -32,10 +41,7 @@ describe( 'client/init', () => {
 
 		return init().then( ( request ) => {
 			expect( request.language ).toBe( 'en' );
-			expect( request.entity.id ).toBe( entity.id );
-			expect( request.entity.labels ).toBe( entity.labels );
-			expect( request.entity.descriptions ).toBe( entity.descriptions );
-			expect( request.entity.aliases ).toBe( entity.aliases );
+			expect( request.entityId ).toBe( entity.id );
 		} );
 	} );
 
