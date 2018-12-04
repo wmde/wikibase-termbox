@@ -111,8 +111,8 @@ export default class TermBox extends ( Vue as VueConstructor<TermboxBindings> ) 
 	.wikibase-termbox { // for use as a prefix
 		&__language {
 			color: $color-dark-azureish-gray;
-			font-size: 0.9rem;
 			font-family: 'Lato Regular', 'Arial Regular';
+			@include fontSize( 13px );
 		}
 
 		&__label {
@@ -144,7 +144,6 @@ export default class TermBox extends ( Vue as VueConstructor<TermboxBindings> ) 
 		}
 
 		&__alias:not( :last-child )::after {
-			font-family: 'Lato Regular', 'Arial Regular';
 			content: attr( data-separator );
 			white-space: nowrap;
 			padding: 0 0.4em;
@@ -154,7 +153,7 @@ export default class TermBox extends ( Vue as VueConstructor<TermboxBindings> ) 
 	// unless we find another difference we should move the primaryLanguage modifier to the label
 	&.wikibase-termbox--primaryLanguage {
 		.wikibase-termbox__label {
-			font-size: 1.5rem;
+			@include fontSize( 23px );
 		}
 	}
 }
