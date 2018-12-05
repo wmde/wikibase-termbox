@@ -10,7 +10,10 @@ import MwWindow from './client/MwWindow';
 Vue.config.productionTip = false;
 
 factory.setLanguageTranslationRepository(
-	new UlsLanguageTranslationRepository( ( window as MwWindow ).wb.getLanguageNameByCode ),
+	new UlsLanguageTranslationRepository(
+		( window as MwWindow ).wb.getLanguageNameByCode,
+		[ 'en' ], // just a placeholder which will be replaced with the next patch
+	),
 );
 factory.setEntityRepository( new EntityRepository() );
 
