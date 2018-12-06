@@ -1,3 +1,9 @@
+$sm: 501px;
+$md: 892px;
+$lg: 1036px;
+
+$grid-breakpoints: ( sm: $sm, md: $md, lg: $lg );
+
 $base-font-size: 16px;
 
 $color-light-azureish-gray: #72777d;

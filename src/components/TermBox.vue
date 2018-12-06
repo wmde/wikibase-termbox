@@ -124,6 +124,13 @@ export default class TermBox extends ( mixins( Messages ) as VueConstructor<Term
 			max-width: 420px;
 		}
 
+		&__label,
+		&__description,
+		&__aliases {
+			min-width: 260px;
+			max-width: 420px;
+		}
+
 		&__label {
 			color: $color-black;
 			line-height: 1.3em;
@@ -169,6 +176,45 @@ export default class TermBox extends ( mixins( Messages ) as VueConstructor<Term
 	&.wikibase-termbox--primaryLanguage {
 		.wikibase-termbox__label {
 			@include fontSize( 23px );
+		}
+	}
+}
+
+@include media-breakpoint-up( sm ) {
+
+}
+
+@include media-breakpoint-up( md ) {
+	// :not( .wikibase-termbox--primaryLanguage ) {
+	.wikibase-termbox {
+		display: table;
+
+		&__language {
+			display: block;
+		}
+
+		&__label,
+		&__description,
+		&__alias {
+			display: table-cell;
+			// TODO same width for the three of them
+		}
+	}
+}
+
+@include media-breakpoint-up( lg ) {
+	// :not( .wikibase-termbox--primaryLanguage ) {
+	.wikibase-termbox {
+		&__language {
+			width: 128px;
+			display: table-cell;
+		}
+
+		&__label,
+		&__description,
+		&__alias {
+			display: table-cell;
+			// TODO same width for the three of them
 		}
 	}
 }
