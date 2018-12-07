@@ -12,6 +12,8 @@ const WIKIBASE_TEST_API_HOST = wikibaseRepoApi.origin;
 const WIKIBASE_TEST_API_PATH = wikibaseRepoApi.pathname;
 
 const germanInGerman = 'Deutsch';
+const englishInGerman = 'Englisch';
+const arabicInGerman = 'Arabic';
 
 function getDomFromMarkup( markup: string ): HTMLElement {
 	const newNode = document.createElement( 'div' );
@@ -34,11 +36,15 @@ function nockSuccessfulLanguageTranslationLoading( inLanguage: string ) {
 				wbcontentlanguages: {
 					en: {
 						code: 'en',
-						name: 'Englisch',
+						name: englishInGerman,
 					},
 					de: {
 						code: 'de',
 						name: germanInGerman,
+					},
+					ar: {
+						code: 'ar',
+						name: arabicInGerman,
 					},
 				},
 			},
@@ -166,20 +172,31 @@ describe( 'Termbox SSR', () => {
 
 			const $dom = getDomFromMarkup( response.text );
 
-			expect( $dom.querySelectorAll( '.wikibase-termbox' ).length ).toBe( 1 );
+			const termboxVersions = $dom.querySelectorAll( '.wikibase-termbox' );
 
-			expect( $dom.querySelector( '.wikibase-termbox--primaryLanguage' ) )
-				.toBeVisible();
+			// 3 hard coded languages currently in src/store/language/actions.ts
+			expect( termboxVersions.length ).toBe( 3 );
 
-			expect( $dom.querySelector( '.wikibase-termbox__language' ) )
+			const primaryLanguage = termboxVersions.item( 0 );
+
+			expect( primaryLanguage ).toHaveClass( 'wikibase-termbox--primaryLanguage' );
+			expect( primaryLanguage ).toBeVisible();
+
+			expect( primaryLanguage.querySelector( '.wikibase-termbox__language' ) )
 				.toHaveTextContent( germanInGerman );
 
-			expect( $dom.querySelector( '.wikibase-termbox__label' ) )
+			expect( primaryLanguage.querySelector( '.wikibase-termbox__label' ) )
 				.toHaveTextContent( mockQ64.labels.de.value );
-			expect( $dom.querySelector( '.wikibase-termbox__description' ) )
+			expect( primaryLanguage.querySelector( '.wikibase-termbox__description' ) )
 				.toHaveTextContent( mockQ64.descriptions.de.value );
-			expect( $dom.querySelectorAll( '.wikibase-termbox__aliases li' ).length )
+			expect( primaryLanguage.querySelectorAll( '.wikibase-termbox__aliases li' ).length )
 				.toBe( mockQ64.aliases.de.length );
+
+			expect( termboxVersions.item( 1 ).querySelector( '.wikibase-termbox__language' ) )
+				.toHaveTextContent( englishInGerman );
+
+			expect( termboxVersions.item( 2 ).querySelector( '.wikibase-termbox__language' ) )
+				.toHaveTextContent( arabicInGerman );
 
 			done();
 		} );

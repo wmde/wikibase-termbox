@@ -1,9 +1,11 @@
 <template>
-	<!-- TODO dynamize wikibase-termbox--primaryLanguage for T205261 -->
-	<div class="wikibase-termbox wikibase-termbox--primaryLanguage">
+	<div class="wikibase-termbox"
+		:class="{ 'wikibase-termbox--primaryLanguage': isInUserLanguage }">
 		<div>
-			<div class="wikibase-termbox__term">
-				<span class="wikibase-termbox__language">{{primaryLanguageName}}</span>
+			<span class="wikibase-termbox__language">{{ languageName }}</span>
+			<div class="wikibase-termbox__term"
+				:dir="language.directionality"
+				:lang="language.code">
 				<h2 class="wikibase-termbox__label">{{ label }}</h2>
 				<p class="wikibase-termbox__description">{{ description }}</p>
 				<ul v-if="hasAliases" class="wikibase-termbox__aliases">
@@ -32,6 +34,7 @@ import {
 } from '@/store/namespaces';
 import Term from '@/datamodel/Term';
 import message from '@/filter/message';
+import Language from '@/datamodel/Language';
 
 Vue.filter( 'message', message );
 
@@ -42,16 +45,18 @@ interface EntityBindings {
 }
 
 interface TermboxBindings extends Vue, EntityBindings {
-	primaryLanguage: string;
+	language: Language;
+	userLanguage: string;
 
 	getLanguageTranslation( language: string, inLanguage: string ): string;
 }
 
 @Component( {
+	props: [ 'language' ],
 	computed: {
-		...mapState( NS_USER, [
-			'primaryLanguage',
-		] ),
+		...mapState( NS_USER, {
+			userLanguage: 'primaryLanguage',
+		} ),
 		...mapGetters( NS_ENTITY, {
 			entityLabel: 'getLabelByLanguage',
 			entityDescription: 'getDescriptionByLanguage',
@@ -65,7 +70,7 @@ interface TermboxBindings extends Vue, EntityBindings {
 
 export default class TermBox extends ( Vue as VueConstructor<TermboxBindings> ) {
 	get label(): string {
-		const label: Term = this.entityLabel( this.primaryLanguage );
+		const label: Term = this.entityLabel( this.language.code );
 		if ( label === null ) {
 			return '???';
 		} else {
@@ -74,7 +79,7 @@ export default class TermBox extends ( Vue as VueConstructor<TermboxBindings> ) 
 	}
 
 	get description(): string {
-		const description: Term = this.entityDescription( this.primaryLanguage );
+		const description: Term = this.entityDescription( this.language.code );
 		if ( description === null ) {
 			return '??';
 		} else {
@@ -83,11 +88,11 @@ export default class TermBox extends ( Vue as VueConstructor<TermboxBindings> ) 
 	}
 
 	get hasAliases(): boolean {
-		return !( this.entityAliases( this.primaryLanguage ) == null );
+		return !( this.entityAliases( this.language.code ) == null );
 	}
 
 	get aliases(): Term[] {
-		const aliases: Term[] =  this.entityAliases( this.primaryLanguage );
+		const aliases: Term[] =  this.entityAliases( this.language.code );
 		if ( aliases === null ) {
 			return [];
 		} else {
@@ -95,8 +100,12 @@ export default class TermBox extends ( Vue as VueConstructor<TermboxBindings> ) 
 		}
 	}
 
-	get primaryLanguageName(): string {
-		const name = this.getLanguageTranslation( this.primaryLanguage, this.primaryLanguage );
+	get isInUserLanguage(): boolean {
+		return this.language.code === this.userLanguage;
+	}
+
+	get languageName(): string {
+		const name = this.getLanguageTranslation( this.language.code, this.userLanguage );
 		if ( name === null ) {
 			return '????';
 		} else {
