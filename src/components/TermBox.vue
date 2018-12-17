@@ -11,10 +11,12 @@
 						class="wikibase-termbox__alias"
 						:data-separator="'wikibase-termbox-alias-separator' | message">{{ alias.value }}</li>
 				</ul>
-				<p class="wikibase-termbox__aliases wikibase-termbox__aliases--placeholder" v-else>?</p>
+				<p v-else class="wikibase-termbox__aliases wikibase-termbox__aliases--placeholder" v-else>?</p>
 			</div>
 		</div>
-		<div class="wikibase-termbox__action"></div>
+		<div class="wikibase-termbox__action">
+			<a href="https://www.wikidata.org/wiki/Q16354758"><span class="wikibase-termbox__edit">edit</span></a>
+		</div>
 	</div>
 </template>
 
@@ -153,6 +155,17 @@ export default class TermBox extends ( Vue as VueConstructor<TermboxBindings> ) 
 			content: attr( data-separator );
 			white-space: nowrap;
 			padding: 0 0.4em;
+		}
+
+		&__edit::before {
+			background-image: linear-gradient(transparent,transparent),$svg-pen;
+			background-size: 20px 20px;
+			width: 20px;
+			height: 20px;
+			vertical-align: middle;
+			opacity: 0.7;
+			display: inline-block;
+			content: ' ';
 		}
 	}
 
