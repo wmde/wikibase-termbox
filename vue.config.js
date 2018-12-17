@@ -1,6 +1,6 @@
 const VueSSRServerPlugin = require( 'vue-server-renderer/server-plugin' );
 const VueSSRClientPlugin = require( 'vue-server-renderer/client-plugin' );
-
+const sassInlineSVG = require('sass-inline-svg-utf8');
 const TARGET_NODE = process.env.WEBPACK_TARGET === 'node';
 const DEV_MODE = process.env.WEBPACK_TARGET === 'dev';
 const filePrefix = 'wikibase.termbox.';
@@ -54,7 +54,8 @@ module.exports = {
 	css: {
 		loaderOptions: {
 			sass: {
-				data: `@import "@/styles/_main.scss";`,
+				data: DEV_MODE ? `@import "@/styles/_devMain.scss";` : `@import "@/styles/_main.scss";`,
+				functions: sassInlineSVG(),
 			},
 		},
 	},
