@@ -11,3 +11,6 @@ The fact that different parts of this project are built for different target arc
 The configuration of the `src/` files is such that code to be executed…
 * **in the client** can make use of all files but the ones in`src/server` and use all types but the ones defined in `src/types/server`
 * **on the server** can make use of all files but the ones in`src/client` and use all types but the ones defined in `src/types/client`
+
+In terms of integration with wikibase this component has some special cases:
+* wikibase read from the root folder of this component `resource.json`, which contains the dependencies of message-keys
