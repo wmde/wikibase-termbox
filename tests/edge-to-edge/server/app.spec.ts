@@ -19,6 +19,7 @@ Vue.config.productionTip = false;
 
 const WIKIBASE_TEST_API_HOST = 'http://mw.testonly.localhost';
 const WIKIBASE_TEST_API_PATH = '/mediawiki/api.php';
+const ENTITY_SPECIAL_PAGE_TEST_PATH = '/mediawiki/index.php';
 
 const logger = {
 	log: jest.fn(),
@@ -101,9 +102,11 @@ function nockSuccessfulMessagesLoading( inLanguage: string ) {
 
 function nockSuccessfulEntityLoading( entityId: string ) {
 	nock( WIKIBASE_TEST_API_HOST )
-		.post( WIKIBASE_TEST_API_PATH + '?format=json', {
-			ids: entityId,
-			action: 'wbgetentities',
+		.get( ENTITY_SPECIAL_PAGE_TEST_PATH )
+		.query( {
+			format: 'json',
+			id: entityId,
+			title: 'Special:EntityData',
 		} )
 		.reply( HttpStatus.OK, {
 			entities: {
@@ -113,6 +116,11 @@ function nockSuccessfulEntityLoading( entityId: string ) {
 }
 
 describe( 'Termbox SSR', () => {
+	beforeEach( () => {
+		nock.disableNetConnect();
+		nock.enableNetConnect( /^127\.0\.0\.1:.*/ ); // supertest requests against the app itself
+	} );
+
 	afterEach( () => {
 		nock.cleanAll();
 		nock.enableNetConnect();
@@ -128,9 +136,11 @@ describe( 'Termbox SSR', () => {
 		nockSuccessfulLanguageLoading( language );
 		nockSuccessfulMessagesLoading( language );
 		nock( WIKIBASE_TEST_API_HOST )
-			.post( WIKIBASE_TEST_API_PATH + '?format=json', {
-				ids: entityId,
-				action: 'wbgetentities',
+			.get( ENTITY_SPECIAL_PAGE_TEST_PATH )
+			.query( {
+				format: 'json',
+				id: entityId,
+				title: 'Special:EntityData',
 			} )
 			.reply( HttpStatus.OK, {
 				malformed: 'yes',
@@ -141,7 +151,7 @@ describe( 'Termbox SSR', () => {
 			expect( response.text ).toContain( 'Technical problem' );
 
 			expect( logger.log ).toHaveBeenCalledTimes( 1 );
-			expect( logger.log.mock.calls[0][0].toString() ).toEqual( 'Error: wbgetentities result not well formed.' );
+			expect( logger.log.mock.calls[0][0].toString() ).toEqual( 'Error: result not well formed.' );
 
 			done();
 		} );
@@ -155,9 +165,11 @@ describe( 'Termbox SSR', () => {
 		nockSuccessfulLanguageLoading( language );
 		nockSuccessfulMessagesLoading( language );
 		nock( WIKIBASE_TEST_API_HOST )
-			.post( WIKIBASE_TEST_API_PATH + '?format=json', {
-				ids: entityId,
-				action: 'wbgetentities',
+			.get( ENTITY_SPECIAL_PAGE_TEST_PATH )
+			.query( {
+				format: 'json',
+				id: entityId,
+				title: 'Special:EntityData',
 			} )
 			.reply( HttpStatus.INTERNAL_SERVER_ERROR, 'upstream system error' );
 
@@ -255,14 +267,13 @@ describe( 'Termbox SSR', () => {
 		nockSuccessfulLanguageLoading( language );
 		nockSuccessfulMessagesLoading( language );
 		nock( WIKIBASE_TEST_API_HOST )
-			.post( WIKIBASE_TEST_API_PATH + '?format=json', 'ids=Q63&action=wbgetentities' )
-			.reply( HttpStatus.OK, {
-				entities: {
-					[ entityId ]: {
-						missing: '',
-					},
-				},
-			} );
+			.get( ENTITY_SPECIAL_PAGE_TEST_PATH )
+			.query( {
+				format: 'json',
+				id: entityId,
+				title: 'Special:EntityData',
+			} )
+			.reply( HttpStatus.BAD_REQUEST, '<html><body><h1>Not Found</h1></body></html>' );
 
 		request( app ).get( '/termbox' ).query( { entity: entityId, language, editLink } ).then( ( response ) => {
 			expect( response.status ).toBe( HttpStatus.NOT_FOUND );

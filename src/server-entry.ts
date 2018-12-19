@@ -1,6 +1,6 @@
 import buildApp from '@/common/buildApp';
 import { factory } from './common/TermboxFactory';
-import MwBotWikibaseFingerprintableEntityRepo from './server/data-access/MwBotWikibaseFingerprintableEntityRepo';
+import MwBotSpecialPageEntityRepo from './server/data-access/MwBotSpecialPageEntityRepo';
 import EntityInitializer from './common/EntityInitializer';
 import BundleBoundaryPassingException, { ErrorReason } from '@/server/exceptions/BundleBoundaryPassingException';
 import EntityNotFound from '@/common/data-access/error/EntityNotFound';
@@ -36,7 +36,7 @@ export default ( context: BundleRendererContext ) => {
 		),
 	);
 	factory.setEntityRepository(
-		new MwBotWikibaseFingerprintableEntityRepo(
+		new MwBotSpecialPageEntityRepo(
 			apiBot,
 			new EntityInitializer(),
 		),
