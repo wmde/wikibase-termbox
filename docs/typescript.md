@@ -13,4 +13,4 @@ The configuration of the `src/` files is such that code to be executed…
 * **on the server** can make use of all files but the ones in`src/client` and use all types but the ones defined in `src/types/client`
 
 In terms of integration with wikibase this component has some special cases:
-* wikibase read from the root folder of this component `resource.json`, which contains the dependencies of message-keys
+* Wikibase reads from this repository's `resource.json` in order to load the required message keys from Wikibase/MediaWiki i18n services
