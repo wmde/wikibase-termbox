@@ -2,6 +2,7 @@
 	<section class="wikibase-entitytermsview" :dir="directionality">
 		<TermBox/>
 		<InAllLanguagesSwitch/>
+		<TermBox/><!-- TODO remove me -->
 	</section>
 </template>
 

@@ -2,16 +2,19 @@
 	<!-- TODO dynamize wikibase-termbox--primaryLanguage for T205261 -->
 	<div class="wikibase-termbox wikibase-termbox--primaryLanguage">
 		<div>
-			<div class="wikibase-termbox__term">
+			<div class="wikibase-termbox__fingerprint">
 				<span class="wikibase-termbox__language">{{primaryLanguageName}}</span>
-				<h2 class="wikibase-termbox__label">{{ label }}</h2>
-				<p class="wikibase-termbox__description">{{ description }}</p>
-				<ul v-if="hasAliases" class="wikibase-termbox__aliases">
-					<li v-for="alias in aliases"
-						class="wikibase-termbox__alias"
-						:data-separator="message( MESSAGE_KEYS.ALIAS_SEPARATOR )">{{ alias.value }}</li>
-				</ul>
-				<p class="wikibase-termbox__aliases wikibase-termbox__aliases--placeholder" v-else>?</p>
+
+				<div class="wikibase-termbox__terms">
+					<h2 class="wikibase-termbox__label">{{ label }}</h2>
+					<p class="wikibase-termbox__description">{{ description }}</p>
+					<ul v-if="hasAliases" class="wikibase-termbox__aliases">
+						<li v-for="alias in aliases"
+							class="wikibase-termbox__alias"
+							:data-separator="message( MESSAGE_KEYS.ALIAS_SEPARATOR )">{{ alias.value }}</li>
+					</ul>
+					<p v-else class="wikibase-termbox__aliases wikibase-termbox__aliases--placeholder">?</p>
+				</div>
 			</div>
 		</div>
 		<div class="wikibase-termbox__actions">
@@ -170,6 +173,24 @@ export default class TermBox extends ( mixins( Messages ) as VueConstructor<Term
 	&.wikibase-termbox--primaryLanguage {
 		.wikibase-termbox__label {
 			@include fontSize( 23px );
+		}
+	}
+
+	&:not(:first-child) { // TODO use proper way to distinguish non-primary termbox once it exists
+		@include media-breakpoint-up( lg ) {
+			.wikibase-termbox__terms {
+				display: flex;
+
+				.wikibase-termbox__label,
+				.wikibase-termbox__description,
+				.wikibase-termbox__aliases {
+					flex: 1;
+				}
+				.wikibase-termbox__description,
+				.wikibase-termbox__aliases {
+					margin-left: 16px;
+				}
+			}
 		}
 	}
 }
