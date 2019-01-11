@@ -26,4 +26,24 @@ export const getters: GetterTree<Entity, any> = {
 	getAliasesByLanguage: ( state: Entity ) => ( languageCode: string ): Term[] | null => {
 		return state.aliases[ languageCode ] || null;
 	},
+	getAvailableLanguageKeys: ( state: Entity ): string[] => {
+		const labelKeys = Object.keys( state.labels );
+		const descriptionKeys = Object.keys( state.descriptions );
+		const aliasKeys = Object.keys( state.aliases );
+		const unionKeys: string[] = [
+			...new Set( [
+					...labelKeys,
+					...descriptionKeys,
+					...aliasKeys,
+			] ),
+		];
+
+		unionKeys.sort( ( key1, key2 ) => {
+			key1 = key1.toLowerCase();
+			key2 = key2.toLowerCase();
+			return ( key1 < key2 ) ? -1 : ( key1 > key2 ) ? 1 : 0;
+		} );
+
+		return unionKeys;
+	},
 };

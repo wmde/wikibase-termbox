@@ -1,7 +1,6 @@
 <template>
 	<section class="wikibase-entitytermsview" :dir="directionality">
 		<TermBox/>
-		<InAllLanguagesSwitch/>
 	</section>
 </template>
 
@@ -9,7 +8,6 @@
 import Vue, { VueConstructor } from 'vue';
 import Component from 'vue-class-component';
 import TermBox from './TermBox.vue';
-import InAllLanguagesSwitch from '@/components/InAllLanguagesSwitch.vue';
 import { mapGetters, mapState, Store } from 'vuex';
 import { NS_ENTITY, NS_USER, NS_LANGUAGE, NS_LINKS } from '@/store/namespaces';
 import { ENTITY_INIT } from '@/store/entity/actionTypes';
@@ -26,10 +24,7 @@ interface AppBindings extends Vue {
 }
 
 @Component( {
-	components: {
-		TermBox,
-		InAllLanguagesSwitch,
-	},
+	components: { TermBox },
 	computed: {
 		...mapState( NS_USER, [ 'primaryLanguage' ] ),
 		...mapGetters( NS_LANGUAGE, { getLanguageByCode: 'getByCode' } ),

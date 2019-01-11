@@ -1,6 +1,6 @@
 import Vuex from 'vuex';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
-import InAllLanguagesSwitch from '@/components/InAllLanguagesSwitch.vue';
+import InAllLanguages from '@/components/InAllLanguages.vue';
 import { createStore } from '@/store';
 import {
 	NS_USER,
@@ -13,7 +13,7 @@ import { mutation } from '@/store/util';
 const localVue = createLocalVue();
 localVue.use( Vuex );
 
-describe( 'InAllLanguagesSwitch.vue', () => {
+describe( 'InAllLanguages.vue', () => {
 	const store = createStore();
 	const deAllShowMessages = 'Alle eingegebenen Sprachen';
 
@@ -29,12 +29,12 @@ describe( 'InAllLanguagesSwitch.vue', () => {
 	store.commit( mutation( NS_USER, LANGUAGE_INIT ), 'de' );
 
 	it( 'renders the link', () => {
-		const wrapper = shallowMount( InAllLanguagesSwitch, { store, localVue } );
+		const wrapper = shallowMount( InAllLanguages, { store, localVue } );
 		expect( wrapper.find( '.wikibase-termbox-subsection-switch__switch>a' ).text() ).toBe( deAllShowMessages );
 	} );
 
 	it( 'renders the reference correctly', () => {
-		const wrapper = shallowMount( InAllLanguagesSwitch, { store, localVue } );
+		const wrapper = shallowMount( InAllLanguages, { store, localVue } );
 		expect(
 			wrapper.find( '.wikibase-termbox-subsection-switch__switch>a' ).attributes( 'href' ),
 		).toBe( 'place-holder-link' );
