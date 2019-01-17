@@ -2,18 +2,20 @@
 	<div
 		class="wikibase-termbox-fingerprint"
 		:class="{ 'wikibase-termbox-fingerprint--primaryLanguage': isPrimary }">
-		<span class="wikibase-termbox-fingerprint__language">{{ languageName }}</span>
-		<h2 class="wikibase-termbox-fingerprint__label">{{ label }}</h2>
-		<div class="wikibase-termbox-fingerprint__description-wrapper">
-			<p class="wikibase-termbox-fingerprint__description">{{ description }}</p>
-		</div>
-		<div class="wikibase-termbox-fingerprint__aliases-wrapper">
-			<ul v-if="hasAliases" class="wikibase-termbox-fingerprint__aliases">
-				<li v-for="alias in aliases"
-					class="wikibase-termbox-fingerprint__alias"
-					:data-separator="message( MESSAGE_KEYS.ALIAS_SEPARATOR )">{{ alias.value }}</li>
-			</ul>
-			<p class="wikibase-termbox-fingerprint__aliases wikibase-termbox-fingerprint__aliases--placeholder" v-else>?</p>
+		<div class="wikibase-termbox-fingerprint__language">{{ languageName }}</div>
+		<div class="wikibase-termbox-fingerprint__terms">
+			<h2 class="wikibase-termbox-fingerprint__label">{{ label }}</h2>
+			<div class="wikibase-termbox-fingerprint__description-wrapper">
+				<p class="wikibase-termbox-fingerprint__description">{{ description }}</p>
+			</div>
+			<div class="wikibase-termbox-fingerprint__aliases-wrapper">
+				<ul v-if="hasAliases" class="wikibase-termbox-fingerprint__aliases">
+					<li v-for="alias in aliases"
+						class="wikibase-termbox-fingerprint__alias"
+						:data-separator="message( MESSAGE_KEYS.ALIAS_SEPARATOR )">{{ alias.value }}</li>
+				</ul>
+				<p class="wikibase-termbox-fingerprint__aliases wikibase-termbox-fingerprint__aliases--placeholder" v-else>?</p>
+			</div>
 		</div>
 	</div>
 </template>
@@ -170,10 +172,11 @@ export default class Fingerprint extends ( mixins( Messages ) as VueConstructor<
 	}
 	&:not(&--primaryLanguage) {
 		@include media-breakpoint-up(md) {
-			display: flex;
-			flex-wrap: wrap;
+			.wikibase-termbox-fingerprint__terms {
+				display: flex;
+			}
+
 			.wikibase-termbox-fingerprint__language {
-				flex-basis: 100%;
 				margin-bottom: 8px;
 			}
 			.wikibase-termbox-fingerprint__label,
@@ -188,8 +191,11 @@ export default class Fingerprint extends ( mixins( Messages ) as VueConstructor<
 			}
 		}
 		@include media-breakpoint-up(lg) {
+			display: flex;
+
 			.wikibase-termbox-fingerprint__language {
 				flex-basis: 128px;
+				flex-shrink: 0;
 				margin-right: 16px;
 				margin-bottom: 0;
 			}
